@@ -309,7 +309,8 @@ body{background:var(--bg);color:var(--text);font-family:var(--ff);font-size:17px
     </div>
     <div class="slbl2">データ</div>
     <div class="sc">
-      <div class="tr" style="border-top:none;padding-top:0"><span class="trl">過去のイベントをクリア</span><button class="dbtn" onclick="clearPast()">クリア</button></div>
+      <div class="tr" style="border-top:none;padding-top:0"><span class="trl">ローカルをリセットして再同期</span><button class="dbtn" onclick="resetLocalAndSync()" style="background:rgba(77,184,127,.09);border-color:rgba(77,184,127,.25);color:var(--green)">再同期</button></div>
+      <div class="tr"><span class="trl">過去のイベントをクリア</span><button class="dbtn" onclick="clearPast()">クリア</button></div>
       <div class="tr"><span class="trl">全イベント削除</span><button class="dbtn" onclick="clearAll()">すべて削除</button></div>
       <div class="tr"><span class="trl">URLを変更・リセット</span><button class="dbtn" onclick="resetApp()">リセット</button></div>
     </div>
@@ -713,25 +714,21 @@ async function doSyncFull(announce){
   syncing=true;
   setSP('go','同期中…');
   try{
-    // 1. Push any local-only events first
+    // 1. Push any pending local-only events to sheet first
     const localOnly=evs.filter(e=>e._localOnly);
     if(localOnly.length>0){
       for(const ev of localOnly){
         const clean={...ev};delete clean._localOnly;
         await sheetUpsert(clean);
       }
-      // Mark them as synced
-      evs=evs.map(e=>{const c={...e};delete c._localOnly;return c;});
-      sv();
     }
 
-    // 2. Pull all from sheet
+    // 2. Pull from sheet — sheet is THE source of truth
+    // Replace local cache entirely with what the sheet has.
+    // This ensures deleted/cleaned rows in the sheet are always reflected.
     const result=await sheetGetAll();
     const sheetEvs=result.events||[];
-
-    // 3. Merge: sheet is source of truth, but keep local if newer
-    const merged=mergeEvs(evs,sheetEvs);
-    evs=merged;
+    evs=sheetEvs.map(e=>normalizeEv(e));
     sv();
 
     lastSync=new Date();
@@ -1024,6 +1021,15 @@ function resetApp(){
   if(!confirm('URLと役割をリセットしますか？（イベントは保持されます）'))return;
   [RK,GK].forEach(k=>localStorage.removeItem(k));
   location.reload();
+}
+
+async function resetLocalAndSync(){
+  // Wipe local event cache and replace with whatever is in the sheet
+  evs=[];
+  sv();
+  showT('ローカルをクリア','スプレッドシートから再同期中…');
+  syncing=false;
+  await doSyncFull(true);
 }
 
 // ── NOTIFICATIONS ─────────────────────────────────────────
