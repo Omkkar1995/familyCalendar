@@ -327,7 +327,16 @@ body{background:var(--bg);color:var(--text);font-family:var(--ff);font-size:17px
     <div class="fg"><label class="fl">メモ（任意）</label><textarea class="fta" id="en" placeholder="詳細…" maxlength="200"></textarea></div>
     <div class="frow">
       <div class="fg"><label class="fl">日付</label><input class="fi" id="ed" type="date"></div>
-      <div class="fg"><label class="fl">時間</label><input class="fi" id="eti" type="time"></div>
+      <div class="fg">
+        <label class="fl" style="display:flex;align-items:center;justify-content:space-between">
+          <span>時間</span>
+          <span style="display:flex;align-items:center;gap:6px;font-size:11px;color:var(--muted);text-transform:none;letter-spacing:0;font-weight:600;cursor:pointer" onclick="toggleAllDay()">
+            終日
+            <div class="tog" id="togAllDay" style="width:34px;height:20px"></div>
+          </span>
+        </label>
+        <input class="fi" id="eti" type="time">
+      </div>
     </div>
     <div class="frow">
       <div class="fg"><label class="fl">カテゴリ</label>
@@ -342,7 +351,7 @@ body{background:var(--bg);color:var(--text);font-family:var(--ff);font-size:17px
           <option value="travel">✈️ 旅行</option>
         </select>
       </div>
-      <div class="fg"><label class="fl">所要時間（分）</label><input class="fi" id="edu" type="number" min="5" max="480" value="60"></div>
+      <div class="fg" id="durFg"><label class="fl">所要時間（分）</label><input class="fi" id="edu" type="number" min="5" max="480" value="60"></div>
     </div>
     <div class="fg">
       <label class="fl">対象者</label>
@@ -372,7 +381,7 @@ const CAT_JP={general:'一般',medical:'医療',work:'仕事',social:'社交',er
 
 // ── STATE ─────────────────────────────────────────────────
 let evs=[], prefs={r30:true,rAt:true}, role=null, gasUrl=null;
-let editId=null, selW='husband', tv='c', uv='c', selRecur='none';
+let editId=null, selW='husband', tv='c', uv='c', selRecur='none', allDay=false;
 let notM={}, lastSync=null, syncing=false, obRole=null;
 
 // ── LOAD / SAVE ───────────────────────────────────────────
@@ -437,8 +446,8 @@ function todayS(){const n=new Date();return`${n.getFullYear()}-${String(n.getMon
 function isToday(d){return normDate(d)===todayS();}
 // isFut: today AND future both count as "not past" — used for upcoming tab
 function isFut(d){return normDate(d)>=todayS();}
-function isPast(e){const n=new Date(),end=new Date(normDate(e.date)+'T'+normTime(e.time));end.setMinutes(end.getMinutes()+(Number(e.duration)||60));return end<n;}
-function isNow(e){const n=new Date(),s=new Date(normDate(e.date)+'T'+normTime(e.time)),en=new Date(normDate(e.date)+'T'+normTime(e.time));en.setMinutes(en.getMinutes()+(Number(e.duration)||60));return n>=s&&n<=en;}
+function isPast(e){if(e.allDay===true||e.allDay==='true'||e.allDay===1){const n=new Date(),eod=new Date(normDate(e.date)+'T23:59:59');return eod<n;}const n=new Date(),end=new Date(normDate(e.date)+'T'+normTime(e.time));end.setMinutes(end.getMinutes()+(Number(e.duration)||60));return end<n;}
+function isNow(e){if(e.allDay===true||e.allDay==='true'||e.allDay===1){const n=new Date(),s=new Date(normDate(e.date)+'T00:00:00'),en=new Date(normDate(e.date)+'T23:59:59');return n>=s&&n<=en;}const n=new Date(),s=new Date(normDate(e.date)+'T'+normTime(e.time)),en=new Date(normDate(e.date)+'T'+normTime(e.time));en.setMinutes(en.getMinutes()+(Number(e.duration)||60));return n>=s&&n<=en;}
 function fmt12(t){if(!t)return{v:'',p:''};const ts=normTime(t);const[h,m]=ts.split(':').map(Number);return{v:`${h%12||12}:${String(m).padStart(2,'0')}`,p:h>=12?'午後':'午前'};}
 function fmtD(d){
   const nd=normDate(d);
@@ -581,8 +590,9 @@ function buildCard(e){
   const wl=e.who==='husband'?'👨 Omi':e.who==='wife'?'👩 Yumi':'💑 Both';
   const tc=e.who==='husband'?'th':e.who==='wife'?'tw':'tb';
   const ok=canEdit(e);
+  const isAllDay=e.allDay===true||e.allDay==='true'||e.allDay===1;
   return`<div class="${evCls(e)}" data-id="${e.id}">
-    <div class="ev-t"><div class="ev-tv">${t.v}</div><div class="ev-tp">${t.p}</div></div>
+    <div class="ev-t">${isAllDay?'<div class="ev-tv" style="font-size:11px;color:var(--gold)">終日</div><div class="ev-tp">ALL</div>':`<div class="ev-tv">${t.v}</div><div class="ev-tp">${t.p}</div>`}</div>
     <div class="ev-sep"></div>
     <div class="ev-b">
       <div class="ev-tit">${esc(e.title)}</div>
@@ -592,6 +602,7 @@ function buildCard(e){
         <span class="tag tc">${EMO[e.cat]||'📋'} ${CAT_JP[e.cat]||'一般'}</span>
         ${e.duration?`<span class="tag tc">⏱ ${e.duration}分</span>`:''}
         ${e.recur&&e.recur!=='none'?`<span class="recur-badge">🔁 ${e.recur==='weekly'?'毎週':'毎月'}</span>`:''}
+        ${isAllDay?'<span class="recur-badge" style="background:rgba(217,168,84,0.12);color:var(--gold);border-color:rgba(217,168,84,0.3)">🌅 終日</span>':''}
       </div>
     </div>
     <div class="ev-acts">
@@ -605,7 +616,7 @@ function buildMini(e){
   const t=fmt12(e.time);
   const p=isToday(e.date)&&isPast(e),a=isToday(e.date)&&isNow(e);
   return`<div class="mini${p?' past':''}${a?' active-now':''}">
-    <div class="mini-time">${t.v} ${t.p}</div>
+    <div class="mini-time">${(e.allDay===true||e.allDay==='true'||e.allDay===1)?'🌅 終日':`${t.v} ${t.p}`}</div>
     <div class="mini-title">${esc(e.title)}</div>
     <div class="mini-cat">${EMO[e.cat]||'📋'} ${e.duration||60}分</div>
   </div>`;
@@ -799,7 +810,7 @@ function openM(id){
     document.getElementById('edu').value=e.duration||60;
     selW=e.who||role;
     selRecur=e.recur||'none';
-    // Hide recur picker when editing a recurring event (handle via edit dialog)
+    allDay=e.allDay===true||e.allDay==='true'||e.allDay===1;
     document.getElementById('recurFg').style.display=e.recurId?'none':'';
     document.getElementById('mtitle').textContent='イベント編集';
     document.getElementById('msub').textContent='変更を保存';
@@ -812,12 +823,14 @@ function openM(id){
     document.getElementById('edu').value=60;
     selW=role||'husband';
     selRecur='none';
+    allDay=false;
     document.getElementById('mtitle').textContent='イベント追加';
     document.getElementById('msub').textContent='スケジュールに追加';
     document.getElementById('recurFg').style.display='';
   }
   updWP();
   pr(selRecur);
+  applyAllDay();
   document.getElementById('mbg').classList.add('open');
   setTimeout(()=>document.getElementById('et').focus(),350);
 }
@@ -825,6 +838,23 @@ function closeM(){document.getElementById('mbg').classList.remove('open');editId
 function bgClick(e){if(e.target===document.getElementById('mbg'))closeM();}
 function pw(w){selW=w;updWP();}
 function updWP(){document.querySelectorAll('.wp').forEach(p=>{p.className='wp';if(p.dataset.w===selW)p.classList.add('s'+selW[0]);});}
+function toggleAllDay(){
+  allDay=!allDay;
+  applyAllDay();
+}
+function applyAllDay(){
+  const tog=document.getElementById('togAllDay');
+  const timeInp=document.getElementById('eti');
+  const durFg=document.getElementById('durFg');
+  if(tog) tog.className='tog'+(allDay?' on':'');
+  if(timeInp){
+    timeInp.disabled=allDay;
+    timeInp.style.opacity=allDay?'0.3':'1';
+    if(allDay) timeInp.value='';
+  }
+  if(durFg) durFg.style.display=allDay?'none':'';
+}
+
 function pr(r){selRecur=r;document.querySelectorAll('.rp').forEach(p=>{p.className='rp';if(p.dataset.r===r)p.classList.add('sel');});}
 
 // Generate recurring occurrences from a base event
@@ -871,9 +901,11 @@ async function saveEv(){
     id:baseId,
     title,
     note:document.getElementById('en').value.trim(),
-    date,time,
+    date,
+    time: allDay?'00:00':time,
+    allDay: allDay,
     cat:document.getElementById('ec').value,
-    duration:parseInt(document.getElementById('edu').value)||60,
+    duration: allDay?1440:parseInt(document.getElementById('edu').value)||60,
     who:selW,
     owner:role,
     updatedAt:Date.now(),
