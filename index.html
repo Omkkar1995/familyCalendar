@@ -155,6 +155,13 @@ body{background:var(--bg);color:var(--text);font-family:var(--ff);font-size:17px
 .wp.sh{background:var(--hbg);border-color:var(--husband);color:var(--husband)}
 .wp.sw{background:var(--wbg);border-color:var(--wife);color:var(--wife)}
 .wp.sb{background:var(--bbg);border-color:var(--both);color:var(--both)}
+.recur-g{display:grid;grid-template-columns:repeat(3,1fr);gap:7px}
+.rp{padding:9px 5px;background:var(--s2);border:1.5px solid var(--border2);border-radius:var(--rs);color:var(--muted);font-size:12px;font-weight:700;cursor:pointer;text-align:center;transition:all .2s;line-height:1.35}
+.rp.sel{background:rgba(196,167,217,0.15);border-color:var(--both);color:var(--both)}
+.recur-badge{display:inline-flex;align-items:center;gap:3px;font-size:10px;padding:2px 7px;border-radius:20px;font-weight:700;background:rgba(196,167,217,0.12);color:var(--both);border:1px solid rgba(196,167,217,0.3)}
+.recur-edit-opts{display:flex;flex-direction:column;gap:8px;margin-top:4px}
+.recur-opt{padding:11px 14px;background:var(--s2);border:1px solid var(--border2);border-radius:var(--rs);cursor:pointer;font-size:14px;color:var(--text);transition:all .2s}
+.recur-opt:hover{border-color:var(--both);background:var(--bbg)}
 .bsub{width:100%;padding:13px;background:var(--gold);color:#140f00;border:none;border-radius:var(--rs);font-family:var(--ff);font-size:15px;font-weight:700;cursor:pointer;margin-top:5px;transition:all .2s}
 .bsub:active{transform:scale(.97)}
 .bsub.loading{opacity:.65;pointer-events:none}
@@ -344,6 +351,14 @@ body{background:var(--bg);color:var(--text);font-family:var(--ff);font-size:17px
         <div class="wp" data-w="both" onclick="pw('both')">💑 Both</div>
       </div>
     </div>
+    <div class="fg" id="recurFg">
+      <label class="fl">繰り返し</label>
+      <div class="recur-g">
+        <div class="rp sel" data-r="none" onclick="pr('none')">🚫 なし</div>
+        <div class="rp" data-r="weekly" onclick="pr('weekly')">🔁 毎週</div>
+        <div class="rp" data-r="monthly" onclick="pr('monthly')">📅 毎月</div>
+      </div>
+    </div>
     <button class="bsub" id="msub" onclick="saveEv()">スケジュールに追加</button>
   </div>
 </div>
@@ -356,7 +371,7 @@ const CAT_JP={general:'一般',medical:'医療',work:'仕事',social:'社交',er
 
 // ── STATE ─────────────────────────────────────────────────
 let evs=[], prefs={r30:true,rAt:true}, role=null, gasUrl=null;
-let editId=null, selW='husband', tv='c', uv='c';
+let editId=null, selW='husband', tv='c', uv='c', selRecur='none';
 let notM={}, lastSync=null, syncing=false, obRole=null;
 
 // ── LOAD / SAVE ───────────────────────────────────────────
@@ -558,6 +573,7 @@ function buildCard(e){
         <span class="tag ${tc}">${wl}</span>
         <span class="tag tc">${EMO[e.cat]||'📋'} ${CAT_JP[e.cat]||'一般'}</span>
         ${e.duration?`<span class="tag tc">⏱ ${e.duration}分</span>`:''}
+        ${e.recur&&e.recur!=='none'?`<span class="recur-badge">🔁 ${e.recur==='weekly'?'毎週':'毎月'}</span>`:''}
       </div>
     </div>
     <div class="ev-acts">
@@ -768,6 +784,9 @@ function openM(id){
     document.getElementById('ec').value=e.cat||'general';
     document.getElementById('edu').value=e.duration||60;
     selW=e.who||role;
+    selRecur=e.recur||'none';
+    // Hide recur picker when editing a recurring event (handle via edit dialog)
+    document.getElementById('recurFg').style.display=e.recurId?'none':'';
     document.getElementById('mtitle').textContent='イベント編集';
     document.getElementById('msub').textContent='変更を保存';
   } else {
@@ -778,10 +797,13 @@ function openM(id){
     document.getElementById('ec').value='general';
     document.getElementById('edu').value=60;
     selW=role||'husband';
+    selRecur='none';
     document.getElementById('mtitle').textContent='イベント追加';
     document.getElementById('msub').textContent='スケジュールに追加';
+    document.getElementById('recurFg').style.display='';
   }
   updWP();
+  pr(selRecur);
   document.getElementById('mbg').classList.add('open');
   setTimeout(()=>document.getElementById('et').focus(),350);
 }
@@ -789,6 +811,35 @@ function closeM(){document.getElementById('mbg').classList.remove('open');editId
 function bgClick(e){if(e.target===document.getElementById('mbg'))closeM();}
 function pw(w){selW=w;updWP();}
 function updWP(){document.querySelectorAll('.wp').forEach(p=>{p.className='wp';if(p.dataset.w===selW)p.classList.add('s'+selW[0]);});}
+function pr(r){selRecur=r;document.querySelectorAll('.rp').forEach(p=>{p.className='rp';if(p.dataset.r===r)p.classList.add('sel');});}
+
+// Generate recurring occurrences from a base event
+function genOccurrences(base, recur){
+  const results=[];
+  const startDate=new Date(normDate(base.date)+'T00:00:00');
+  const endDate=new Date(startDate);
+  endDate.setMonth(endDate.getMonth()+6); // 6 months ahead
+  const recurId=base.id; // all instances share this recurId
+  let cur=new Date(startDate);
+  let isFirst=true;
+  while(cur<=endDate){
+    const dateStr=`${cur.getFullYear()}-${String(cur.getMonth()+1).padStart(2,'0')}-${String(cur.getDate()).padStart(2,'0')}`;
+    const ev={
+      ...base,
+      id: isFirst ? base.id : gid(),
+      date: dateStr,
+      recurId,
+      recur,
+      updatedAt: Date.now()+(isFirst?0:1)
+    };
+    results.push(ev);
+    isFirst=false;
+    if(recur==='weekly') cur.setDate(cur.getDate()+7);
+    else if(recur==='monthly') cur.setMonth(cur.getMonth()+1);
+    else break;
+  }
+  return results;
+}
 
 async function saveEv(){
   const title=document.getElementById('et').value.trim();
@@ -801,8 +852,9 @@ async function saveEv(){
   sub.classList.add('loading');
   sub.textContent='保存中…';
 
-  const e={
-    id:editId||gid(),
+  const baseId=editId||gid();
+  const baseEv={
+    id:baseId,
     title,
     note:document.getElementById('en').value.trim(),
     date,time,
@@ -811,23 +863,36 @@ async function saveEv(){
     who:selW,
     owner:role,
     updatedAt:Date.now(),
-    deleted:false
+    deleted:false,
+    recur:selRecur||'none',
+    recurId:selRecur!=='none'?baseId:''
   };
 
+  // Generate all occurrences if recurring
+  const toSave = selRecur!=='none' && !editId
+    ? genOccurrences(baseEv, selRecur)
+    : [baseEv];
+
   // Save locally first (instant feedback)
-  if(editId){const i=evs.findIndex(x=>x.id===editId);evs[i]=e;}
-  else{evs.push(e);}
+  if(editId){
+    const i=evs.findIndex(x=>x.id===editId);
+    evs[i]=baseEv;
+  } else {
+    evs.push(...toSave);
+  }
   sv();
   closeM();
   renderToday();renderUpcoming();
 
-  // Then push to sheet
+  // Push to sheet
+  const pushCount=toSave.length;
   try{
-    await sheetUpsert(e);
-    showT(editId?'更新されました':'追加されました！',editId?e.title:`${e.title} — ${fmtD(date)}`);
+    for(const ev of toSave) await sheetUpsert(ev);
+    if(editId) showT('更新されました',baseEv.title);
+    else if(selRecur!=='none') showT('繰り返し追加！',`${title} — ${pushCount}件作成しました`);
+    else showT('追加されました！',`${title} — ${fmtD(date)}`);
   }catch(err){
-    // Mark as local-only so next sync will push it
-    evs=evs.map(x=>x.id===e.id?{...x,_localOnly:true}:x);
+    evs=evs.map(x=>toSave.find(s=>s.id===x.id)?{...x,_localOnly:true}:x);
     sv();
     showT('ローカルに保存','オフラインです。次回の同期時に自動的にアップロードされます。');
   }
@@ -839,32 +904,102 @@ async function saveEv(){
 function editE(id){
   const e=evs.find(x=>x.id===id);
   if(!e||!canEdit(e)){showT('編集できません','自分のイベントのみ編集可能です。');return;}
+  // If recurring, show edit scope dialog
+  if(e.recurId){
+    showRecurEditDialog(id);
+  } else {
+    openM(id);
+  }
+}
+
+function showRecurEditDialog(id){
+  const e=evs.find(x=>x.id===id);
+  const dlg=document.createElement('div');
+  dlg.style.cssText='position:fixed;inset:0;background:rgba(0,0,0,.77);z-index:600;display:flex;align-items:center;justify-content:center;padding:20px';
+  dlg.innerHTML=`<div style="background:var(--s1);border:1px solid var(--border2);border-radius:var(--r);padding:22px 20px;max-width:320px;width:100%">
+    <div style="font-family:var(--fd);font-size:18px;margin-bottom:6px">繰り返しイベントの編集</div>
+    <div style="font-size:13px;color:var(--muted);margin-bottom:16px">${esc(e.title)}</div>
+    <div class="recur-edit-opts">
+      <div class="recur-opt" onclick="this.closest('div[style]').remove();openM('${id}')">このイベントのみ編集</div>
+      <div class="recur-opt" onclick="this.closest('div[style]').remove();editFutureRecur('${id}')">これ以降のすべてを編集</div>
+      <div class="recur-opt" style="color:var(--muted);font-size:13px" onclick="this.closest('div[style]').remove()">キャンセル</div>
+    </div>
+  </div>`;
+  document.body.appendChild(dlg);
+}
+
+function editFutureRecur(id){
+  const e=evs.find(x=>x.id===id);
+  if(!e)return;
+  // Open modal pre-filled; on save will update this and future instances
   openM(id);
+  // Flag that this is a "future recur" edit
+  document.getElementById('msub').dataset.futureRecur='1';
+  document.getElementById('msub').dataset.recurId=e.recurId;
+  document.getElementById('msub').dataset.recurDate=e.date;
 }
 
 async function delE(id){
   const e=evs.find(x=>x.id===id);
   if(!e||!canEdit(e)){showT('削除できません','自分のイベントのみ削除可能です。');return;}
-  if(!confirm(`"${e.title}"を削除しますか？`))return;
-  evs=evs.filter(x=>x.id!==id);sv();
+  if(e.recurId){
+    showRecurDelDialog(id);
+  } else {
+    if(!confirm(`"${e.title}"を削除しますか？`))return;
+    await doDelete([id]);
+  }
+}
+
+function showRecurDelDialog(id){
+  const e=evs.find(x=>x.id===id);
+  const dlg=document.createElement('div');
+  dlg.style.cssText='position:fixed;inset:0;background:rgba(0,0,0,.77);z-index:600;display:flex;align-items:center;justify-content:center;padding:20px';
+  dlg.innerHTML=`<div style="background:var(--s1);border:1px solid var(--border2);border-radius:var(--r);padding:22px 20px;max-width:320px;width:100%">
+    <div style="font-family:var(--fd);font-size:18px;margin-bottom:6px">繰り返しイベントの削除</div>
+    <div style="font-size:13px;color:var(--muted);margin-bottom:16px">${esc(e.title)}</div>
+    <div class="recur-edit-opts">
+      <div class="recur-opt" onclick="this.closest('div[style]').remove();doDelete(['${id}'])">このイベントのみ</div>
+      <div class="recur-opt" onclick="this.closest('div[style]').remove();deleteFutureRecur('${id}')">これ以降のすべて</div>
+      <div class="recur-opt" onclick="this.closest('div[style]').remove();deleteAllRecur('${e.recurId}')">すべての繰り返し</div>
+      <div class="recur-opt" style="color:var(--muted);font-size:13px" onclick="this.closest('div[style]').remove()">キャンセル</div>
+    </div>
+  </div>`;
+  document.body.appendChild(dlg);
+}
+
+async function doDelete(ids){
+  evs=evs.filter(x=>!ids.includes(x.id));sv();
   renderToday();renderUpcoming();
-  try{await sheetDelete(id);}
-  catch(err){showT('削除エラー','次回の同期時に再試行されます。');}
+  for(const id of ids){try{await sheetDelete(id);}catch(_){}}
+}
+
+async function deleteFutureRecur(id){
+  const e=evs.find(x=>x.id===id)||evs.find(x=>x.id===id);
+  if(!e)return;
+  const ids=evs.filter(x=>x.recurId===e.recurId&&normDate(x.date)>=normDate(e.date)).map(x=>x.id);
+  await doDelete(ids);
+  showT('削除しました',`${ids.length}件の繰り返しを削除しました`);
+}
+
+async function deleteAllRecur(recurId){
+  const ids=evs.filter(x=>x.recurId===recurId).map(x=>x.id);
+  await doDelete(ids);
+  showT('削除しました',`すべての繰り返し（${ids.length}件）を削除しました`);
 }
 
 async function clearPast(){
   if(!confirm('過去のイベントを削除しますか？'))return;
   const t=todayS();
-  const toDelete=evs.filter(e=>e.date<t&&e.owner===role);
-  evs=evs.filter(e=>e.date>=t);sv();renderToday();
-  for(const e of toDelete){try{await sheetDelete(e.id);}catch(_){}}
+  const ids=evs.filter(e=>normDate(e.date)<t&&e.owner===role).map(e=>e.id);
+  evs=evs.filter(e=>!(normDate(e.date)<t&&e.owner===role));sv();renderToday();
+  for(const id of ids){try{await sheetDelete(id);}catch(_){}}
 }
 
 async function clearAll(){
   if(!confirm('すべてのイベントを削除しますか？'))return;
-  const myEvs=evs.filter(e=>e.owner===role);
+  const ids=evs.filter(e=>e.owner===role).map(e=>e.id);
   evs=evs.filter(e=>e.owner!==role);sv();renderToday();renderUpcoming();
-  for(const e of myEvs){try{await sheetDelete(e.id);}catch(_){}}
+  for(const id of ids){try{await sheetDelete(id);}catch(_){}}
   showT('削除完了','自分のイベントを削除しました。');
 }
 
