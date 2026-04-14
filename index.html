@@ -13,15 +13,14 @@
 :root{--bg:#FAF9FC;--s1:#F5F3F9;--s2:#F0EBF7;--s3:#E8E0F0;--s4:#DDD3E8;--border:rgba(176,169,201,0.2);--border2:rgba(176,169,201,0.35);--text:#2D1B4E;--muted:#6B5B7D;--dim:#9D8FB5;--husband:#6BA3D9;--hbg:rgba(107,163,217,0.15);--hbd:rgba(107,163,217,0.3);--wife:#E89AA8;--wbg:rgba(232,154,168,0.15);--wbd:rgba(232,154,168,0.3);--both:#C4A7D9;--bbg:rgba(196,167,217,0.15);--bbd:rgba(196,167,217,0.3);--gold:#D9A854;--green:#4DB87F;--red:#D97B7B;--r:14px;--rs:10px;--rx:7px;--ff:'BIZ UDPGothic',sans-serif;--fd:'BIZ UDPGothic',sans-serif}
 [data-theme="dark"]{--bg:#0d0c18;--s1:#16152a;--s2:#1e1d33;--s3:#262540;--s4:#2e2c4d;--border:rgba(255,255,255,0.07);--border2:rgba(255,255,255,0.13);--text:#f0eeff;--muted:rgba(240,238,255,0.55);--dim:rgba(240,238,255,0.3);--husband:#7eb8f7;--hbg:rgba(126,184,247,0.12);--hbd:rgba(126,184,247,0.25);--wife:#f78eb8;--wbg:rgba(247,142,184,0.12);--wbd:rgba(247,142,184,0.25);--both:#c4a7f7;--bbg:rgba(196,167,247,0.12);--bbd:rgba(196,167,247,0.25);--gold:#f0c96a;--green:#6be8a7;--red:#f07878}
 [data-theme="light"]{--bg:#FFFFFF;--s1:#F8F8FB;--s2:#F0F0F5;--s3:#E8E8F0;--s4:#DDD3E8;--border:rgba(176,169,201,0.15);--border2:rgba(176,169,201,0.25);--text:#1A1A2E;--muted:#4A4A6B;--dim:#7B7B9B;--husband:#4A90E2;--hbg:rgba(74,144,226,0.12);--hbd:rgba(74,144,226,0.25);--wife:#E85B7D;--wbg:rgba(232,91,125,0.12);--wbd:rgba(232,91,125,0.25);--both:#B895D9;--bbg:rgba(184,149,217,0.12);--bbd:rgba(184,149,217,0.25);--gold:#D4A545;--green:#3DA575;--red:#D97B7B}
-[data-theme="dark"]{--bg:#0d0c18;--s1:#16152a;--s2:#1e1d33;--s3:#262540;--s4:#2e2c4d;--border:rgba(255,255,255,0.07);--border2:rgba(255,255,255,0.13);--text:#f0eeff;--muted:rgba(240,238,255,0.55);--dim:rgba(240,238,255,0.3);--husband:#7eb8f7;--hbg:rgba(126,184,247,0.12);--hbd:rgba(126,184,247,0.25);--wife:#f78eb8;--wbg:rgba(247,142,184,0.12);--wbd:rgba(247,142,184,0.25);--both:#c4a7f7;--bbg:rgba(196,167,247,0.12);--bbd:rgba(196,167,247,0.25);--gold:#f0c96a;--green:#6be8a7;--red:#f07878}
-[data-theme="light"]{--bg:#FFFFFF;--s1:#F8F8FB;--s2:#F0F0F5;--s3:#E8E8F0;--s4:#DDD3E8;--border:rgba(176,169,201,0.15);--border2:rgba(176,169,201,0.25);--text:#1A1A2E;--muted:#4A4A6B;--dim:#7B7B9B;--husband:#4A90E2;--hbg:rgba(74,144,226,0.12);--hbd:rgba(74,144,226,0.25);--wife:#E85B7D;--wbg:rgba(232,91,125,0.12);--wbd:rgba(232,91,125,0.25);--both:#B895D9;--bbg:rgba(184,149,217,0.12);--bbd:rgba(184,149,217,0.25);--gold:#D4A545;--green:#3DA575;--red:#D97B7B}
 *{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
-body{background:var(--bg);color:var(--text);font-family:var(--ff);font-size:17px;min-height:100vh;-webkit-font-smoothing:antialiased;overflow-x:hidden;background-image:radial-gradient(circle at 20% 80%, rgba(255,183,197,0.08) 0%, transparent 50%),radial-gradient(circle at 80% 20%, rgba(255,183,197,0.06) 0%, transparent 50%),radial-gradient(circle at 40% 40%, rgba(196,167,217,0.05) 0%, transparent 50%);background-attachment:fixed}
+body{background:var(--bg);color:var(--text);font-family:var(--ff);font-size:17px;min-height:100vh;-webkit-font-smoothing:antialiased;overflow-x:hidden;background-image:radial-gradient(circle at 20% 80%,rgba(255,183,197,0.08) 0%,transparent 50%),radial-gradient(circle at 80% 20%,rgba(255,183,197,0.06) 0%,transparent 50%),radial-gradient(circle at 40% 40%,rgba(196,167,217,0.05) 0%,transparent 50%);background-attachment:fixed}
 
+/* ── SETUP / ONBOARDING ── */
 .onboard{position:fixed;inset:0;background:var(--bg);z-index:9999;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:28px 22px;gap:18px;overflow-y:auto}
 .ob-logo{font-family:var(--fd);font-size:34px;color:#FFB7C5;text-align:center;line-height:1.2}
 .ob-logo em{color:var(--gold);font-style:italic}
-.ob-sub{font-size:16px;color:var(--muted);text-align:center;max-width:280px;line-height:1.6}
+.ob-sub{font-size:14px;color:var(--muted);text-align:center;max-width:300px;line-height:1.6}
 .role-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;width:100%;max-width:330px}
 .role-card{background:var(--s2);border:1.5px solid var(--border2);border-radius:var(--r);padding:22px 14px;text-align:center;cursor:pointer;transition:all .2s}
 .role-card.rh:hover,.role-card.rh.sel{border-color:var(--husband);background:var(--hbg)}
@@ -29,26 +28,35 @@ body{background:var(--bg);color:var(--text);font-family:var(--ff);font-size:17px
 .role-icon{font-size:30px;margin-bottom:7px}
 .role-name{font-size:15px;font-weight:600}
 .role-desc{font-size:11px;color:var(--muted);margin-top:3px}
-.ob-btn{width:100%;max-width:330px;padding:14px;background:var(--gold);color:#140f00;border:none;border-radius:var(--rs);font-family:var(--ff);font-size:15px;font-weight:700;cursor:pointer;transition:all .2s;opacity:.35;pointer-events:none}
+
+/* URL setup section */
+.url-setup{width:100%;max-width:340px;display:flex;flex-direction:column;gap:10px}
+.url-label{font-size:11px;color:var(--dim);text-transform:uppercase;letter-spacing:1px;font-weight:700}
+.url-inp{width:100%;background:var(--s2);border:1px solid var(--border2);border-radius:var(--rs);color:var(--text);font-family:var(--ff);font-size:12px;padding:11px 13px;outline:none;transition:border-color .2s;word-break:break-all}
+.url-inp:focus{border-color:var(--gold)}
+.url-inp::placeholder{color:var(--dim);font-size:11px}
+.test-btn{background:var(--s3);border:1px solid var(--border2);color:var(--muted);padding:9px;border-radius:var(--rs);font-family:var(--ff);font-size:13px;font-weight:600;cursor:pointer;transition:all .2s;width:100%}
+.test-btn:hover{border-color:var(--gold);color:var(--gold)}
+.test-result{padding:9px 12px;border-radius:var(--rx);font-size:12px;font-weight:600;display:none;text-align:center}
+.test-ok{background:rgba(77,184,127,.1);border:1px solid rgba(77,184,127,.3);color:var(--green)}
+.test-fail{background:rgba(217,123,123,.1);border:1px solid rgba(217,123,123,.3);color:var(--red)}
+.hint-box{background:var(--s2);border:1px solid var(--border2);border-radius:var(--rs);padding:12px;font-size:12px;color:var(--muted);line-height:1.7}
+.hint-box a{color:var(--gold)}
+.hint-step{margin-bottom:4px}
+.hint-step:last-child{margin-bottom:0}
+
+.ob-btn{width:100%;max-width:340px;padding:14px;background:var(--gold);color:#140f00;border:none;border-radius:var(--rs);font-family:var(--ff);font-size:15px;font-weight:700;cursor:pointer;transition:all .2s;opacity:.35;pointer-events:none}
 .ob-btn.ready{opacity:1;pointer-events:all}
 .ob-btn.ready:active{transform:scale(.97)}
-.sync-sec{width:100%;max-width:330px}
-.slbl{font-size:11px;color:var(--dim);text-transform:uppercase;letter-spacing:1px;font-weight:700;margin-bottom:8px;display:block}
-.sync-inp{width:100%;background:var(--s2);border:1px solid var(--border2);border-radius:var(--rs);color:var(--text);font-family:monospace;font-size:18px;padding:12px;outline:none;text-align:center;letter-spacing:3px}
-.sync-inp:focus{border-color:var(--gold)}
-.code-display{background:var(--s2);border:1px solid var(--border2);border-radius:var(--rs);padding:16px;text-align:center;cursor:pointer;transition:all .2s}
-.code-display:hover{border-color:var(--gold)}
-.code-val{font-size:26px;font-weight:700;letter-spacing:4px;color:var(--gold);font-family:monospace;margin-bottom:6px}
-.code-hint{font-size:11px;color:var(--muted);line-height:1.5}
-.ob-link{font-size:13px;color:var(--dim);cursor:pointer;text-decoration:underline;text-underline-offset:3px;text-align:center}
 
+/* ── HEADER ── */
 .header{background:var(--s1);border-bottom:1px solid var(--border);padding:0 15px;position:sticky;top:0;z-index:100;height:58px;display:flex;align-items:center;justify-content:space-between}
 .logo{font-family:var(--fd);font-size:19px}
 .logo em{font-style:italic;color:var(--gold)}
 .hdr-right{display:flex;align-items:center;gap:9px}
 .sync-pill{display:flex;align-items:center;gap:5px;font-size:11px;padding:5px 9px;border-radius:20px;border:1px solid var(--border2);cursor:pointer;background:var(--s2);color:var(--muted);transition:all .2s;white-space:nowrap}
-.sync-pill.ok{border-color:rgba(107,232,167,.3);color:var(--green)}
-.sync-pill.go{border-color:rgba(240,201,106,.3);color:var(--gold)}
+.sync-pill.ok{border-color:rgba(77,184,127,.35);color:var(--green)}
+.sync-pill.go{border-color:rgba(217,168,84,.35);color:var(--gold)}
 .sdot{width:6px;height:6px;border-radius:50%;background:currentColor;flex-shrink:0}
 @keyframes blink{0%,100%{opacity:1}50%{opacity:.25}}
 .sync-pill.go .sdot{animation:blink 1s infinite}
@@ -56,17 +64,19 @@ body{background:var(--bg);color:var(--text);font-family:var(--ff);font-size:17px
 .av-h{background:var(--hbg);border:1.5px solid var(--husband)}
 .av-w{background:var(--wbg);border:1.5px solid var(--wife)}
 
+/* ── TABS ── */
 .tabs{background:var(--s1);border-bottom:1px solid var(--border);display:flex;padding:0 15px;gap:3px}
 .tab{flex:1;padding:10px 5px;background:none;border:none;color:var(--dim);font-family:var(--ff);font-size:14px;font-weight:500;cursor:pointer;border-bottom:2px solid transparent;transition:all .2s;text-align:center}
 .tab.active{color:var(--gold);border-bottom-color:var(--gold)}
 
+/* ── MAIN ── */
 .main{max-width:600px;margin:0 auto;padding:15px 13px 100px}
 
 .vtog{display:flex;background:var(--s2);border:1px solid var(--border);border-radius:var(--rs);padding:3px;gap:2px;margin-bottom:14px}
 .vt{flex:1;padding:8px;background:none;border:none;border-radius:8px;color:var(--muted);font-family:var(--ff);font-size:12px;font-weight:600;cursor:pointer;transition:all .2s;text-align:center}
 .vt.active{background:var(--s4);color:var(--text)}
 
-.hero{background:linear-gradient(135deg, rgba(255,183,197,0.12) 0%, rgba(255,200,220,0.08) 100%);border:1px solid rgba(255,183,197,0.3);border-radius:var(--r);padding:17px;margin-bottom:14px;position:relative;overflow:hidden}
+.hero{background:linear-gradient(135deg,rgba(255,183,197,0.12) 0%,rgba(255,200,220,0.08) 100%);border:1px solid rgba(255,183,197,0.3);border-radius:var(--r);padding:17px;margin-bottom:14px;position:relative;overflow:hidden}
 .hero::after{content:'';position:absolute;top:-40px;right:-40px;width:120px;height:120px;background:radial-gradient(circle,rgba(196,167,247,.1) 0%,transparent 70%);border-radius:50%;pointer-events:none}
 .hero-lbl{font-size:10px;text-transform:uppercase;letter-spacing:1.5px;color:var(--gold);font-weight:700;margin-bottom:2px}
 .hero-title{font-family:var(--fd);font-size:26px;line-height:1.2}
@@ -126,6 +136,7 @@ body{background:var(--bg);color:var(--text);font-family:var(--ff);font-size:17px
 .fab:hover{transform:scale(1.07)}
 .fab:active{transform:scale(.92)}
 
+/* ── MODAL ── */
 .mbg{position:fixed;inset:0;background:rgba(0,0,0,.77);z-index:500;display:flex;align-items:flex-end;opacity:0;pointer-events:none;transition:opacity .22s}
 .mbg.open{opacity:1;pointer-events:all}
 .modal{background:var(--s1);border:1px solid var(--border2);border-radius:var(--r) var(--r) 0 0;padding:19px 17px 42px;width:100%;max-width:600px;margin:0 auto;transform:translateY(100%);transition:transform .3s cubic-bezier(.32,.72,0,1);max-height:92vh;overflow-y:auto}
@@ -146,18 +157,22 @@ body{background:var(--bg);color:var(--text);font-family:var(--ff);font-size:17px
 .wp.sb{background:var(--bbg);border-color:var(--both);color:var(--both)}
 .bsub{width:100%;padding:13px;background:var(--gold);color:#140f00;border:none;border-radius:var(--rs);font-family:var(--ff);font-size:15px;font-weight:700;cursor:pointer;margin-top:5px;transition:all .2s}
 .bsub:active{transform:scale(.97)}
+.bsub.loading{opacity:.65;pointer-events:none}
 
+/* ── TOAST ── */
 .tw-wrap{position:fixed;top:70px;left:50%;transform:translateX(-50%);width:calc(100% - 26px);max-width:370px;z-index:999;display:flex;flex-direction:column;gap:6px;pointer-events:none}
 .toast{background:var(--s3);border:1px solid var(--border2);border-radius:var(--rs);padding:11px 13px;animation:tIn .28s cubic-bezier(.32,.72,0,1) forwards;box-shadow:0 8px 26px rgba(0,0,0,.5);pointer-events:all}
 @keyframes tIn{from{opacity:0;transform:translateY(-7px) scale(.96)}to{opacity:1;transform:none}}
 .toast-t{font-size:13px;font-weight:700;color:var(--gold);margin-bottom:2px}
 .toast-b{font-size:12px;color:var(--muted)}
 
+/* ── UPCOMING ── */
 .up-day{margin-bottom:20px}
 .up-hdr{display:flex;align-items:center;gap:9px;margin-bottom:9px}
 .up-name{font-family:var(--fd);font-size:16px}
 .up-badge{padding:2px 8px;background:rgba(240,201,106,.1);color:var(--gold);border-radius:20px;font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.5px;border:1px solid rgba(240,201,106,.2)}
 
+/* ── SETTINGS ── */
 .sc{background:var(--s2);border:1px solid var(--border);border-radius:var(--r);padding:13px;margin-bottom:12px}
 .shdr{font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.5px;margin-bottom:9px;color:var(--text)}
 .tr{display:flex;align-items:center;justify-content:space-between;padding:7px 0;border-top:1px solid var(--border)}
@@ -168,17 +183,15 @@ body{background:var(--bg);color:var(--text);font-family:var(--ff);font-size:17px
 .tog.on::after{transform:translateX(17px)}
 .dbtn{background:rgba(240,120,120,.09);border:1px solid rgba(240,120,120,.22);color:var(--red);padding:5px 11px;border-radius:var(--rx);font-size:12px;font-weight:700;cursor:pointer}
 .si{background:var(--s2);border:1px solid var(--border);border-radius:var(--r);padding:13px;margin-bottom:12px}
-.si-row{display:flex;align-items:center;justify-content:space-between;padding:5px 0}
-.si-lbl{font-size:12px;color:var(--dim)}
-.si-val{font-size:13px;font-weight:600}
+.si-row{display:flex;align-items:center;justify-content:space-between;padding:5px 0;gap:8px}
+.si-lbl{font-size:12px;color:var(--dim);flex-shrink:0}
+.si-val{font-size:12px;font-weight:600;text-align:right;word-break:break-all}
 .theme-btn{padding:8px 14px;background:var(--s2);border:1.5px solid var(--border2);border-radius:var(--rs);color:var(--muted);font-size:13px;font-weight:600;cursor:pointer;text-align:center;transition:all .2s;white-space:nowrap}
 .theme-btn.active{background:var(--gold);border-color:var(--gold);color:#140f00}
 .theme-btn:hover{border-color:var(--gold)}
+.url-chip{font-size:10px;font-family:monospace;color:var(--dim);background:var(--s3);padding:3px 8px;border-radius:5px;word-break:break-all;max-width:200px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;cursor:pointer}
 
 @media(max-width:370px){.frow{grid-template-columns:1fr}.split{grid-template-columns:1fr}}
-.theme-btn{padding:8px 14px;background:var(--s2);border:1.5px solid var(--border2);border-radius:var(--rs);color:var(--muted);font-size:13px;font-weight:600;cursor:pointer;text-align:center;transition:all .2s;white-space:nowrap}
-.theme-btn.active{background:var(--gold);border-color:var(--gold);color:#140f00}
-.theme-btn:hover{border-color:var(--gold)}
 </style>
 </head>
 <body>
@@ -186,8 +199,25 @@ body{background:var(--bg);color:var(--text);font-family:var(--ff);font-size:17px
 <!-- ONBOARDING -->
 <div class="onboard" id="onboard">
   <div class="ob-logo">私たちの<em>スケジュール</em><br><span style="font-size:16px;color:var(--muted);font-family:var(--ff);font-weight:300">二人のために ♥</span></div>
-  <div class="ob-sub">共有家族スケジュール — 互いの予定を確認し、リマインダーを一緒に受け取ります。</div>
-  <div class="role-grid">
+  <div class="ob-sub">Googleスプレッドシートに安全に保存されます。一度だけ設定してください。</div>
+
+  <!-- STEP 1: URL -->
+  <div class="url-setup">
+    <span class="url-label">① Apps Script のウェブアプリURL</span>
+    <input class="url-inp" id="gasUrl" type="url" placeholder="https://script.google.com/macros/s/…/exec" oninput="onUrlInput()">
+    <button class="test-btn" onclick="testConnection()">🔌 接続をテスト</button>
+    <div class="test-result" id="testResult"></div>
+    <div class="hint-box">
+      <div class="hint-step">1. <a href="https://sheets.google.com" target="_blank">sheets.google.com</a> で新しいスプレッドシートを作成</div>
+      <div class="hint-step">2. メニュー → <strong>拡張機能 → Apps Script</strong></div>
+      <div class="hint-step">3. エディタの内容を全て削除し、<strong>google-apps-script.js</strong> の内容を貼り付けて保存</div>
+      <div class="hint-step">4. <strong>デプロイ → 新しいデプロイ</strong> → 種類「ウェブアプリ」→ アクセス「全員」→ デプロイ</div>
+      <div class="hint-step">5. 表示されたURLをここに貼り付け</div>
+    </div>
+  </div>
+
+  <!-- STEP 2: Role -->
+  <div class="role-grid" id="roleGrid" style="opacity:.4;pointer-events:none">
     <div class="role-card rh" onclick="selectRole('husband')">
       <div class="role-icon">👨</div>
       <div class="role-name" style="color:var(--husband)">Omi</div>
@@ -199,11 +229,8 @@ body{background:var(--bg);color:var(--text);font-family:var(--ff);font-size:17px
       <div class="role-desc">ピンクのイベント</div>
     </div>
   </div>
-  <div class="sync-sec" id="syncSec" style="display:none">
-    <div id="syncContent"></div>
-  </div>
+
   <button class="ob-btn" id="obBtn" onclick="finishOnboard()">開始する</button>
-  <span class="ob-link" id="obSkip" style="display:none" onclick="skipPairing()">ペアリングをスキップ</span>
 </div>
 
 <div class="tw-wrap" id="twWrap"></div>
@@ -250,7 +277,7 @@ body{background:var(--bg);color:var(--text);font-family:var(--ff);font-size:17px
   <div id="tab-settings" style="display:none">
     <div class="slbl2">マイプロフィール</div>
     <div class="si" id="profCard"></div>
-    <div class="slbl2">同期</div>
+    <div class="slbl2">スプレッドシート同期</div>
     <div class="si" id="syncCard"></div>
     <div class="slbl2">テーマ</div>
     <div class="sc">
@@ -277,7 +304,7 @@ body{background:var(--bg);color:var(--text);font-family:var(--ff);font-size:17px
     <div class="sc">
       <div class="tr" style="border-top:none;padding-top:0"><span class="trl">過去のイベントをクリア</span><button class="dbtn" onclick="clearPast()">クリア</button></div>
       <div class="tr"><span class="trl">全イベント削除</span><button class="dbtn" onclick="clearAll()">すべて削除</button></div>
-      <div class="tr"><span class="trl">リセット＆再ペアリング</span><button class="dbtn" onclick="resetApp()">リセット</button></div>
+      <div class="tr"><span class="trl">URLを変更・リセット</span><button class="dbtn" onclick="resetApp()">リセット</button></div>
     </div>
   </div>
 </div>
@@ -322,64 +349,139 @@ body{background:var(--bg);color:var(--text);font-family:var(--ff);font-size:17px
 </div>
 
 <script>
-const SK='fs3',PK='fp3',RK='fr3',SYK='fsy3',NK='fn3';
+// ── STORAGE KEYS ──────────────────────────────────────────
+const SK='fs4_evs', PK='fs4_prefs', RK='fs4_role', GK='fs4_gasUrl', NK='fs4_notif';
 const EMO={general:'📋',medical:'🏥',work:'💼',social:'🎉',errand:'🛒',family:'👨‍👩‍👧',sport:'🏃',travel:'✈️'};
+const CAT_JP={general:'一般',medical:'医療',work:'仕事',social:'社交',errand:'用事',family:'家族',sport:'スポーツ',travel:'旅行'};
 
-let evs=[],prefs={r30:true,rAt:true},role=null,code=null,editId=null,selW='husband',tv='c',uv='c',notM={},lastSync=null,syncing=false;
-let obRole=null,obMode='create',genCode='';
+// ── STATE ─────────────────────────────────────────────────
+let evs=[], prefs={r30:true,rAt:true}, role=null, gasUrl=null;
+let editId=null, selW='husband', tv='c', uv='c';
+let notM={}, lastSync=null, syncing=false, obRole=null;
 
+// ── LOAD / SAVE ───────────────────────────────────────────
 function ld(){
   try{evs=JSON.parse(localStorage.getItem(SK))||[];}catch(e){evs=[];}
   try{prefs={...prefs,...JSON.parse(localStorage.getItem(PK))};}catch(e){}
   role=localStorage.getItem(RK)||null;
-  code=localStorage.getItem(SYK)||null;
+  gasUrl=localStorage.getItem(GK)||null;
   try{notM=JSON.parse(sessionStorage.getItem(NK)||'{}');}catch(e){}
 }
-function sv(){localStorage.setItem(SK,JSON.stringify(evs));localStorage.setItem(PK,JSON.stringify(prefs));}
+function sv(){
+  localStorage.setItem(SK,JSON.stringify(evs));
+  localStorage.setItem(PK,JSON.stringify(prefs));
+}
+
+// ── UTILITIES ─────────────────────────────────────────────
 function esc(s){return String(s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');}
 function gid(){return Date.now().toString(36)+Math.random().toString(36).slice(2,5);}
-function mkCode(){return Math.random().toString(36).slice(2,8).toUpperCase();}
+function todayS(){const n=new Date();return`${n.getFullYear()}-${String(n.getMonth()+1).padStart(2,'0')}-${String(n.getDate()).padStart(2,'0')}`;}
+function isToday(d){return d===todayS();}
+function isFut(d){return d>todayS();}
+function isPast(e){const n=new Date(),end=new Date(e.date+'T'+e.time);end.setMinutes(end.getMinutes()+(e.duration||60));return end<n;}
+function isNow(e){const n=new Date(),s=new Date(e.date+'T'+e.time),en=new Date(e.date+'T'+e.time);en.setMinutes(en.getMinutes()+(e.duration||60));return n>=s&&n<=en;}
+function fmt12(t){if(!t)return{v:'',p:''};const[h,m]=t.split(':').map(Number);return{v:`${h%12||12}:${String(m).padStart(2,'0')}`,p:h>=12?'午後':'午前'};}
+function fmtD(d){const dt=new Date(d+'T00:00:00');const days=['日','月','火','水','木','金','土'],mos=['1月','2月','3月','4月','5月','6月','7月','8月','9月','10月','11月','12月'];return`${mos[dt.getMonth()]}${dt.getDate()}日（${days[dt.getDay()]}）`;}
+function dDiff(d){return Math.round((new Date(d+'T00:00:00')-new Date(todayS()+'T00:00:00'))/86400000);}
+function canEdit(e){return e.owner===role;}
+function evCls(e){const p=isToday(e.date)&&isPast(e),a=isToday(e.date)&&isNow(e);const oc=e.who==='husband'?'ev-h':e.who==='wife'?'ev-w':'ev-b';return`evc ${oc}${p?' past':''}${a?' active-now':''}`;}
 
-// ONBOARD
+// ── GOOGLE SHEETS API ─────────────────────────────────────
+async function gasCall(params){
+  if(!gasUrl) throw new Error('URLが設定されていません');
+  const url=gasUrl+'?'+new URLSearchParams(params).toString();
+  const r=await fetch(url,{method:'GET',mode:'cors'});
+  if(!r.ok) throw new Error('HTTP '+r.status);
+  const json=await r.json();
+  if(json.error) throw new Error(json.error);
+  return json;
+}
+
+async function gasPost(body){
+  if(!gasUrl) throw new Error('URLが設定されていません');
+  // GAS doesn't support POST CORS well without OAuth — use GET with params
+  return gasCall(body);
+}
+
+async function sheetGetAll(){
+  return gasCall({action:'getAll'});
+}
+
+async function sheetUpsert(ev){
+  return gasCall({action:'upsert', event:JSON.stringify(ev)});
+}
+
+async function sheetDelete(id){
+  return gasCall({action:'delete', id, updatedAt:Date.now()});
+}
+
+async function sheetPing(){
+  return gasCall({action:'ping'});
+}
+
+// ── ONBOARDING ────────────────────────────────────────────
+function onUrlInput(){
+  const v=document.getElementById('gasUrl').value.trim();
+  const valid=v.startsWith('https://script.google.com/macros/s/');
+  const rg=document.getElementById('roleGrid');
+  const tr=document.getElementById('testResult');
+  tr.style.display='none';
+  if(valid){
+    rg.style.opacity='1';
+    rg.style.pointerEvents='';
+  } else {
+    rg.style.opacity='.4';
+    rg.style.pointerEvents='none';
+    obRole=null;
+    document.querySelectorAll('.role-card').forEach(c=>c.classList.remove('sel'));
+    document.getElementById('obBtn').classList.remove('ready');
+  }
+}
+
+async function testConnection(){
+  const url=document.getElementById('gasUrl').value.trim();
+  if(!url){showT('URLを入力','Apps ScriptのウェブアプリURLを貼り付けてください。');return;}
+  const tr=document.getElementById('testResult');
+  tr.className='test-result';tr.style.display='block';tr.textContent='接続中…';
+  try{
+    gasUrl=url;
+    const r=await sheetPing();
+    tr.className='test-result test-ok';
+    tr.textContent='✓ 接続成功！スプレッドシートは正常に動作しています。';
+    // unlock role selection
+    const rg=document.getElementById('roleGrid');
+    rg.style.opacity='1';rg.style.pointerEvents='';
+  }catch(err){
+    tr.className='test-result test-fail';
+    tr.textContent='✗ 接続失敗: '+err.message+' — URLを確認し、デプロイ時に「全員」アクセスを選択してください。';
+    gasUrl=null;
+  }
+}
+
 function selectRole(r){
+  const url=document.getElementById('gasUrl').value.trim();
+  if(!url.startsWith('https://script.google.com/macros/s/')){
+    showT('先にURLを入力','Apps ScriptのURLを入力してテストしてください。');return;
+  }
   obRole=r;
   document.querySelectorAll('.role-card').forEach(c=>c.classList.remove('sel'));
   document.querySelector('.role-card.r'+r[0]).classList.add('sel');
-  document.getElementById('syncSec').style.display='';
-  renderSS();
   document.getElementById('obBtn').classList.add('ready');
-  document.getElementById('obSkip').style.display='block';
-}
-function renderSS(){
-  const el=document.getElementById('syncContent');
-  if(obMode==='create'){
-    if(!genCode) genCode=mkCode();
-    el.innerHTML=`<span class="slbl">あなたのペアコード — パートナーと共有してください</span>
-    <div class="code-display" onclick="copyCode('${genCode}')">
-      <div class="code-val">${genCode}</div>
-      <div class="code-hint">👆 タップしてコピー • パートナーがアプリを開く際にこのコードを入力します</div>
-    </div>
-    <div style="text-align:center;margin-top:10px"><span class="ob-link" onclick="swOB('join')">パートナーがコードを作成済み →</span></div>`;
-  } else {
-    el.innerHTML=`<span class="slbl">パートナーのペアコードを入力</span>
-    <input class="sync-inp" id="obCI" type="text" maxlength="6" placeholder="ABC123" oninput="this.value=this.value.toUpperCase().replace(/[^A-Z0-9]/g,'')">
-    <div style="text-align:center;margin-top:10px"><span class="ob-link" onclick="swOB('create')">← 新規コードを作成</span></div>`;
-  }
-}
-function swOB(m){obMode=m;if(m==='create')genCode=mkCode();renderSS();}
-function copyCode(c){navigator.clipboard?.writeText(c).then(()=>showT('コピー完了！','パートナーと共有してください。'));}
-function skipPairing(){role=obRole;localStorage.setItem(RK,role);launchApp();}
-function finishOnboard(){
-  if(!obRole)return;
-  role=obRole;
-  localStorage.setItem(RK,role);
-  if(obMode==='create'){code=genCode;}
-  else{const v=document.getElementById('obCI')?.value.trim()||'';if(v.length<4){showT('コード入力','パートナーのペアコードを入力してください。');return;}code=v;}
-  if(code) localStorage.setItem(SYK,code);
-  launchApp();
-  if(code) setTimeout(()=>doSyncFull(true),900);
 }
 
+async function finishOnboard(){
+  if(!obRole){showT('役割を選択','OmiまたはYumiを選んでください。');return;}
+  const url=document.getElementById('gasUrl').value.trim();
+  if(!url){showT('URLを入力','Apps ScriptのURLが必要です。');return;}
+  gasUrl=url;
+  role=obRole;
+  localStorage.setItem(RK,role);
+  localStorage.setItem(GK,gasUrl);
+  launchApp();
+  setTimeout(()=>doSyncFull(true),600);
+}
+
+// ── APP LAUNCH ────────────────────────────────────────────
 function launchApp(){
   document.getElementById('onboard').style.display='none';
   ['hdr','tabs','mainArea','fab'].forEach(id=>document.getElementById(id).style.display='');
@@ -390,10 +492,11 @@ function launchApp(){
   renderToday();
   reqNotif();
   setInterval(()=>{checkNotifs();if(!document.getElementById('tab-today').style.display)renderToday();},30000);
-  if(code) setInterval(()=>doSyncFull(false),60000);
+  // Auto-sync every 45 seconds
+  setInterval(()=>doSyncFull(false),45000);
 }
 
-// TABS
+// ── TABS ──────────────────────────────────────────────────
 function sw(n,btn){
   document.querySelectorAll('.tab').forEach(t=>t.classList.remove('active'));
   btn.classList.add('active');
@@ -402,27 +505,10 @@ function sw(n,btn){
   if(n==='upcoming')renderUpcoming();
   if(n==='settings')renderSettings();
 }
-
-// VIEW
 function setV(v){tv=v;document.getElementById('vt1').classList.toggle('active',v==='c');document.getElementById('vt2').classList.toggle('active',v==='s');renderToday();}
 function setUV(v){uv=v;document.getElementById('uv1').classList.toggle('active',v==='c');document.getElementById('uv2').classList.toggle('active',v==='s');renderUpcoming();}
 
-// HELPERS
-function todayS(){const n=new Date();return`${n.getFullYear()}-${String(n.getMonth()+1).padStart(2,'0')}-${String(n.getDate()).padStart(2,'0')}`;}
-function isToday(d){return d===todayS();}
-function isFut(d){return d>todayS();}
-function isPast(e){const n=new Date(),end=new Date(e.date+'T'+e.time);end.setMinutes(end.getMinutes()+(e.duration||60));return end<n;}
-function isNow(e){const n=new Date(),s=new Date(e.date+'T'+e.time),en=new Date(e.date+'T'+e.time);en.setMinutes(en.getMinutes()+(e.duration||60));return n>=s&&n<=en;}
-function fmt12(t){if(!t)return{v:'',p:''};const[h,m]=t.split(':').map(Number);return{v:`${h%12||12}:${String(m).padStart(2,'0')}`,p:h>=12?'午後':'午前'};}
-function fmtD(d){const dt=new Date(d+'T00:00:00');const days=['日','月','火','水','木','金','土'],mos=['1月','2月','3月','4月','5月','6月','7月','8月','9月','10月','11月','12月'];return`${mos[dt.getMonth()]}${dt.getDate()}日（${days[dt.getDay()]}）`;}
-function dDiff(d){return Math.round((new Date(d+'T00:00:00')-new Date(todayS()+'T00:00:00'))/86400000);}
-function canEdit(e){return e.owner===role;}
-function evCls(e){
-  const p=isToday(e.date)&&isPast(e),a=isToday(e.date)&&isNow(e);
-  const oc=e.who==='husband'?'ev-h':e.who==='wife'?'ev-w':'ev-b';
-  return`evc ${oc}${p?' past':''}${a?' active-now':''}`;
-}
-
+// ── CARD BUILDERS ─────────────────────────────────────────
 function buildCard(e){
   const t=fmt12(e.time);
   const wl=e.who==='husband'?'👨 Omi':e.who==='wife'?'👩 Yumi':'💑 Both';
@@ -436,7 +522,7 @@ function buildCard(e){
       ${e.note?`<div class="ev-note">${esc(e.note)}</div>`:''}
       <div class="tags">
         <span class="tag ${tc}">${wl}</span>
-        <span class="tag tc">${EMO[e.cat]||'📋'} ${e.cat==='general'?'一般':e.cat==='medical'?'医療':e.cat==='work'?'仕事':e.cat==='social'?'社交':e.cat==='errand'?'用事':e.cat==='family'?'家族':e.cat==='sport'?'スポーツ':e.cat==='travel'?'旅行':'一般'}</span>
+        <span class="tag tc">${EMO[e.cat]||'📋'} ${CAT_JP[e.cat]||'一般'}</span>
         ${e.duration?`<span class="tag tc">⏱ ${e.duration}分</span>`:''}
       </div>
     </div>
@@ -459,7 +545,7 @@ function buildMini(e){
 
 function emptyHtml(txt){return`<div class="empty"><div class="empty-ico">🗓</div><div class="empty-txt">${txt}</div></div>`;}
 
-// RENDER TODAY
+// ── RENDER TODAY ──────────────────────────────────────────
 function renderToday(){
   const n=new Date();
   const days=['日曜日','月曜日','火曜日','水曜日','木曜日','金曜日','土曜日'];
@@ -483,13 +569,13 @@ function renderToday(){
     const he=te.filter(e=>e.who==='husband'||e.who==='both');
     const we=te.filter(e=>e.who==='wife'||e.who==='both');
     document.getElementById('tSplit').innerHTML=`<div class="split">
-      <div><div class="col-hdr"><div class="col-dot" style="background:var(--husband)"></div><div class="col-name" style="color:var(--husband)">Omi</div></div>${he.length?he.map(e=>buildMini(e)).join(''):'<div style="font-size:11px;color:var(--dim);padding:6px 0">No events</div>'}</div>
-      <div><div class="col-hdr"><div class="col-dot" style="background:var(--wife)"></div><div class="col-name" style="color:var(--wife)">Yumi</div></div>${we.length?we.map(e=>buildMini(e)).join(''):'<div style="font-size:11px;color:var(--dim);padding:6px 0">No events</div>'}</div>
+      <div><div class="col-hdr"><div class="col-dot" style="background:var(--husband)"></div><div class="col-name" style="color:var(--husband)">Omi</div></div>${he.length?he.map(e=>buildMini(e)).join(''):'<div style="font-size:11px;color:var(--dim);padding:6px 0">予定なし</div>'}</div>
+      <div><div class="col-hdr"><div class="col-dot" style="background:var(--wife)"></div><div class="col-name" style="color:var(--wife)">Yumi</div></div>${we.length?we.map(e=>buildMini(e)).join(''):'<div style="font-size:11px;color:var(--dim);padding:6px 0">予定なし</div>'}</div>
     </div>`;
   }
 }
 
-// RENDER UPCOMING
+// ── RENDER UPCOMING ───────────────────────────────────────
 function renderUpcoming(){
   const cont=document.getElementById('uContent');
   const fe=evs.filter(e=>isFut(e.date)).sort((a,b)=>(a.date+a.time).localeCompare(b.date+b.time));
@@ -516,26 +602,108 @@ function renderUpcoming(){
   cont.innerHTML=html;
 }
 
-// RENDER SETTINGS
+// ── RENDER SETTINGS ───────────────────────────────────────
 function renderSettings(){
   document.getElementById('t30').className='tog '+(prefs.r30?'on':'');
   document.getElementById('tAt').className='tog '+(prefs.rAt?'on':'');
+  const shortUrl=gasUrl?gasUrl.slice(0,48)+'…':'未設定';
   document.getElementById('profCard').innerHTML=`
-    <div class="si-row"><span class="si-lbl">My Role</span><span class="si-val" style="color:var(--${role})">${role==='husband'?'👨 Omi':'👩 Yumi'}</span></div>
-    <div class="si-row"><span class="si-lbl">ペアコード</span>${code?`<span class="code-copy" onclick="navigator.clipboard?.writeText('${code}').then(()=>showT('コピー完了！',''))">${code}</span>`:'<span class="si-val" style="color:var(--dim)">ペアリングなし</span>'}</div>`;
-  const ls=lastSync?`最後に同期: ${lastSync.toLocaleTimeString('ja-JP',{hour:'2-digit',minute:'2-digit'})}`:'まだ同期されていません';
+    <div class="si-row"><span class="si-lbl">役割</span><span class="si-val" style="color:var(--${role})">${role==='husband'?'👨 Omi':'👩 Yumi'}</span></div>
+    <div class="si-row"><span class="si-lbl">データベース</span><span class="si-val" style="color:var(--green);font-size:11px">✓ Google スプレッドシート</span></div>`;
+  const ls=lastSync?`最終同期: ${lastSync.toLocaleTimeString('ja-JP',{hour:'2-digit',minute:'2-digit'})}`:'まだ同期されていません';
   document.getElementById('syncCard').innerHTML=`
-    <div class="si-row"><span class="si-lbl">ステータス</span><span class="si-val" style="color:${code?'var(--green)':'var(--dim)'}">${code?'ペアリング ✓':'ペアリングなし'}</span></div>
-    <div class="si-row"><span class="si-lbl">${ls}</span><button onclick="doSync()" style="background:var(--s3);border:1px solid var(--border2);color:var(--muted);padding:5px 11px;border-radius:var(--rx);font-size:12px;font-weight:600;cursor:pointer">今すぐ同期</button></div>
-    <div class="si-row" style="display:block;padding-top:8px"><span class="si-lbl" style="font-size:11px;line-height:1.6;display:block">パートナーとペアコードを共有してください。アプリは60秒ごとに自動同期されます。両者がすべての共有イベントを確認でき、自分のイベントのみ編集可能です。</span></div>`;
+    <div class="si-row"><span class="si-lbl">ステータス</span><span class="si-val" style="color:${lastSync?'var(--green)':'var(--dim)'}">${lastSync?'同期済み ✓':'未同期'}</span></div>
+    <div class="si-row"><span class="si-lbl">${ls}</span><button onclick="doSync()" style="background:var(--s3);border:1px solid var(--border2);color:var(--muted);padding:5px 11px;border-radius:var(--rx);font-size:12px;font-weight:600;cursor:pointer;font-family:var(--ff)">今すぐ同期</button></div>
+    <div class="si-row" style="flex-direction:column;align-items:flex-start;gap:4px">
+      <span class="si-lbl">Apps Script URL</span>
+      <span class="url-chip" title="${gasUrl||''}" onclick="navigator.clipboard?.writeText('${gasUrl||''}').then(()=>showT('コピー完了',''))">${shortUrl}</span>
+    </div>
+    <div class="si-row" style="display:block">
+      <span class="si-lbl" style="font-size:11px;line-height:1.6;display:block">データはあなたのGoogleスプレッドシートに永続的に保存されます。データ損失はありません。両者が45秒ごとに自動同期されます。</span>
+    </div>`;
   const nb=document.getElementById('notifBar');
   if(!('Notification' in window))nb.innerHTML='';
-  else if(Notification.permission==='granted')nb.innerHTML=`<div style="background:rgba(107,232,167,.07);border:1px solid rgba(107,232,167,.2);border-radius:var(--rs);padding:9px 12px;margin-bottom:11px;font-size:13px;color:var(--green)">✓ 通知が有効です</div>`;
-  else nb.innerHTML=`<div style="background:rgba(240,120,120,.07);border:1px solid rgba(240,120,120,.2);border-radius:var(--rs);padding:9px 12px;margin-bottom:11px;font-size:13px;color:var(--red);cursor:pointer" onclick="reqNotif()">🔔 タップして通知を有効にする</div>`;
+  else if(Notification.permission==='granted')nb.innerHTML=`<div style="background:rgba(77,184,127,.07);border:1px solid rgba(77,184,127,.2);border-radius:var(--rs);padding:9px 12px;margin-bottom:11px;font-size:13px;color:var(--green)">✓ 通知が有効です</div>`;
+  else nb.innerHTML=`<div style="background:rgba(217,123,123,.07);border:1px solid rgba(217,123,123,.2);border-radius:var(--rs);padding:9px 12px;margin-bottom:11px;font-size:13px;color:var(--red);cursor:pointer" onclick="reqNotif()">🔔 タップして通知を有効にする</div>`;
+
+  // Sync themes
+  document.querySelectorAll('.theme-btn').forEach(b=>b.classList.remove('active'));
+  const ct=localStorage.getItem('theme')||'pastel';
+  document.querySelector(`[data-theme="${ct}"]`)?.classList.add('active');
 }
 function tp(k){prefs[k]=!prefs[k];sv();renderSettings();}
 
-// MODAL
+// ── SYNC WITH GOOGLE SHEETS ───────────────────────────────
+function setSP(st,txt){
+  const p=document.getElementById('spill'),t=document.getElementById('spillTxt');
+  if(!p)return;
+  p.className='sync-pill'+(st==='ok'?' ok':st==='go'?' go':'');
+  t.textContent=txt;
+}
+
+async function doSyncFull(announce){
+  if(!gasUrl||syncing)return;
+  syncing=true;
+  setSP('go','同期中…');
+  try{
+    // 1. Push any local-only events first
+    const localOnly=evs.filter(e=>e._localOnly);
+    if(localOnly.length>0){
+      for(const ev of localOnly){
+        const clean={...ev};delete clean._localOnly;
+        await sheetUpsert(clean);
+      }
+      // Mark them as synced
+      evs=evs.map(e=>{const c={...e};delete c._localOnly;return c;});
+      sv();
+    }
+
+    // 2. Pull all from sheet
+    const result=await sheetGetAll();
+    const sheetEvs=result.events||[];
+
+    // 3. Merge: sheet is source of truth, but keep local if newer
+    const merged=mergeEvs(evs,sheetEvs);
+    evs=merged;
+    sv();
+
+    lastSync=new Date();
+    setSP('ok','同期完了 ✓');
+
+    if(announce){
+      const partnerEvs=evs.filter(e=>e.owner!==role);
+      if(partnerEvs.length>0) showT('同期されました！',`パートナーから${partnerEvs.length}件のイベントを取得しました ♥`);
+      else showT('接続成功！','スプレッドシートに接続されました。');
+    }
+
+    const at=document.querySelector('.tab.active')?.textContent||'今日';
+    if(at.includes('今日'))renderToday();
+    if(at.includes('今後'))renderUpcoming();
+    if(at.includes('設定'))renderSettings();
+
+  }catch(err){
+    console.warn('Sync error:',err);
+    setSP('','同期');
+    if(announce) showT('同期エラー','接続を確認してください: '+err.message);
+  }
+  syncing=false;
+}
+
+function mergeEvs(local,remote){
+  const m={};
+  // Add all remote first
+  remote.forEach(e=>{if(e.id)m[e.id]=e;});
+  // Override with local if newer
+  local.forEach(e=>{
+    if(!e.id)return;
+    if(!m[e.id]||Number(e.updatedAt)>Number(m[e.id].updatedAt)) m[e.id]=e;
+  });
+  return Object.values(m).sort((a,b)=>a.date.localeCompare(b.date)||a.time.localeCompare(b.time));
+}
+
+function doSync(){syncing=false;doSyncFull(true);}
+
+// ── MODAL ─────────────────────────────────────────────────
 function openM(id){
   editId=id||null;
   const n=new Date(),ds=todayS(),ts=`${String(n.getHours()).padStart(2,'0')}:${String(n.getMinutes()).padStart(2,'0')}`;
@@ -570,83 +738,99 @@ function bgClick(e){if(e.target===document.getElementById('mbg'))closeM();}
 function pw(w){selW=w;updWP();}
 function updWP(){document.querySelectorAll('.wp').forEach(p=>{p.className='wp';if(p.dataset.w===selW)p.classList.add('s'+selW[0]);});}
 
-function saveEv(){
+async function saveEv(){
   const title=document.getElementById('et').value.trim();
   const date=document.getElementById('ed').value;
   const time=document.getElementById('eti').value;
   if(!title){document.getElementById('et').focus();return;}
   if(!date||!time)return;
-  const e={id:editId||gid(),title,note:document.getElementById('en').value.trim(),date,time,cat:document.getElementById('ec').value,duration:parseInt(document.getElementById('edu').value)||60,who:selW,owner:role,updatedAt:Date.now()};
-  if(editId){const i=evs.findIndex(x=>x.id===editId);evs[i]=e;showT('更新されました',e.title);}
-  else{evs.push(e);showT('追加されました！',`${e.title} — ${fmtD(date)}`);}
-  sv();closeM();doSyncFull(false);
-  const at=document.querySelector('.tab.active').textContent.toLowerCase();
-  if(at.includes('today')||at.includes('今日'))renderToday();
-  if(at.includes('upcoming')||at.includes('今後'))renderUpcoming();
-}
-function editE(id){const e=evs.find(x=>x.id===id);if(!e||!canEdit(e)){showT('編集できません','自分のイベントのみ編集可能です。');return;}openM(id);}
-function delE(id){const e=evs.find(x=>x.id===id);if(!e||!canEdit(e)){showT('削除できません','自分のイベントのみ削除可能です。');return;}if(!confirm(`"${e.title}"を削除しますか？`))return;evs=evs.filter(x=>x.id!==id);sv();doSyncFull(false);renderToday();renderUpcoming();}
-function clearPast(){if(!confirm('過去のイベントを削除しますか？'))return;const t=todayS();evs=evs.filter(e=>e.date>=t);sv();doSyncFull(false);renderToday();}
-function clearAll(){if(!confirm('すべてのイベントを削除しますか？'))return;evs=[];sv();doSyncFull(false);renderToday();}
-function resetApp(){if(!confirm('リセット＆再ペアリングしますか？'))return;[RK,SYK].forEach(k=>localStorage.removeItem(k));location.reload();}
 
-// SYNC
-function setSP(st,txt){
-  const p=document.getElementById('spill'),t=document.getElementById('spillTxt');
-  if(!p)return;
-  p.className='sync-pill'+(st==='ok'?' ok':st==='go'?' go':'');
-  t.textContent=txt;
-}
+  const sub=document.getElementById('msub');
+  sub.classList.add('loading');
+  sub.textContent='保存中…';
 
-async function doSyncFull(announce){
-  if(!code||syncing)return;
-  syncing=true;setSP('go','同期中…');
+  const e={
+    id:editId||gid(),
+    title,
+    note:document.getElementById('en').value.trim(),
+    date,time,
+    cat:document.getElementById('ec').value,
+    duration:parseInt(document.getElementById('edu').value)||60,
+    who:selW,
+    owner:role,
+    updatedAt:Date.now(),
+    deleted:false
+  };
+
+  // Save locally first (instant feedback)
+  if(editId){const i=evs.findIndex(x=>x.id===editId);evs[i]=e;}
+  else{evs.push(e);}
+  sv();
+  closeM();
+  renderToday();renderUpcoming();
+
+  // Then push to sheet
   try{
-    const prompt=`You are a simple JSON data relay for a family schedule sync system.
-Pair code: "${code}"
-Sender role: "${role}"
-My current events (JSON): ${JSON.stringify(evs)}
+    await sheetUpsert(e);
+    showT(editId?'更新されました':'追加されました！',editId?e.title:`${e.title} — ${fmtD(date)}`);
+  }catch(err){
+    // Mark as local-only so next sync will push it
+    evs=evs.map(x=>x.id===e.id?{...x,_localOnly:true}:x);
+    sv();
+    showT('ローカルに保存','オフラインです。次回の同期時に自動的にアップロードされます。');
+  }
 
-Task: Act as a key-value store. For this pair code, merge events from both spouses.
-Rules:
-1. If you've seen events from both roles for this pair code, merge them: for same id keep highest updatedAt.
-2. Return ONLY this JSON, nothing else, no markdown fences:
-{"merged":[...array of event objects...],"partnerCount":<number of partner events found>}
-3. If first time for this code, return my events as merged, partnerCount:0.`;
-
-    const r=await fetch('https://api.anthropic.com/v1/messages',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({model:'claude-sonnet-4-20250514',max_tokens:5000,system:'You are a pure JSON relay. Output only valid JSON. Never add markdown, explanations, or code fences.',messages:[{role:'user',content:prompt}]})});
-    if(!r.ok)throw new Error('HTTP '+r.status);
-    const d=await r.json();
-    const txt=(d.content||[]).filter(b=>b.type==='text').map(b=>b.text).join('').replace(/```[\w]*|```/g,'').trim();
-    const parsed=JSON.parse(txt);
-    if(parsed.merged&&Array.isArray(parsed.merged)){
-      evs=merge(evs,parsed.merged);sv();
-      lastSync=new Date();setSP('ok','同期完了 ✓');
-      if(announce){
-        if(parsed.partnerCount>0) showT('同期されました！',`パートナーから${parsed.partnerCount}件のイベントを取得しました ♥`);
-        else showT('接続されました','パートナーの同期を待機中です。');
-      }
-      const at=document.querySelector('.tab.active')?.textContent.toLowerCase()||'today';
-      if(at.includes('today')||at.includes('今日'))renderToday();
-      if(at.includes('upcoming')||at.includes('今後'))renderUpcoming();
-      if(at.includes('settings')||at.includes('設定'))renderSettings();
-    }
-  }catch(err){console.warn('sync:',err);setSP('','同期');if(announce)showT('同期の問題','ローカルに保存されています。接続を確認してください。');}
-  syncing=false;
+  sub.classList.remove('loading');
+  sub.textContent=editId?'変更を保存':'スケジュールに追加';
 }
 
-function merge(a,b){
-  const m={};
-  [...a,...b].forEach(e=>{if(!m[e.id]||e.updatedAt>m[e.id].updatedAt)m[e.id]=e;});
-  return Object.values(m);
+function editE(id){
+  const e=evs.find(x=>x.id===id);
+  if(!e||!canEdit(e)){showT('編集できません','自分のイベントのみ編集可能です。');return;}
+  openM(id);
 }
 
-function doSync(){syncing=false;doSyncFull(true);}
+async function delE(id){
+  const e=evs.find(x=>x.id===id);
+  if(!e||!canEdit(e)){showT('削除できません','自分のイベントのみ削除可能です。');return;}
+  if(!confirm(`"${e.title}"を削除しますか？`))return;
+  evs=evs.filter(x=>x.id!==id);sv();
+  renderToday();renderUpcoming();
+  try{await sheetDelete(id);}
+  catch(err){showT('削除エラー','次回の同期時に再試行されます。');}
+}
 
-// NOTIF
+async function clearPast(){
+  if(!confirm('過去のイベントを削除しますか？'))return;
+  const t=todayS();
+  const toDelete=evs.filter(e=>e.date<t&&e.owner===role);
+  evs=evs.filter(e=>e.date>=t);sv();renderToday();
+  for(const e of toDelete){try{await sheetDelete(e.id);}catch(_){}}
+}
+
+async function clearAll(){
+  if(!confirm('すべてのイベントを削除しますか？'))return;
+  const myEvs=evs.filter(e=>e.owner===role);
+  evs=evs.filter(e=>e.owner!==role);sv();renderToday();renderUpcoming();
+  for(const e of myEvs){try{await sheetDelete(e.id);}catch(_){}}
+  showT('削除完了','自分のイベントを削除しました。');
+}
+
+function resetApp(){
+  if(!confirm('URLと役割をリセットしますか？（イベントは保持されます）'))return;
+  [RK,GK].forEach(k=>localStorage.removeItem(k));
+  location.reload();
+}
+
+// ── NOTIFICATIONS ─────────────────────────────────────────
 async function reqNotif(){
   if(!('Notification' in window))return;
-  if(Notification.permission==='default'){setTimeout(async()=>{const r=await Notification.requestPermission();if(r==='granted')showT('通知が有効','イベント前にリマインダーを受け取ります。');},1500);}
+  if(Notification.permission==='default'){
+    setTimeout(async()=>{
+      const r=await Notification.requestPermission();
+      if(r==='granted')showT('通知が有効','イベント前にリマインダーを受け取ります。');
+    },1500);
+  }
 }
 function checkNotifs(){
   if(!('Notification' in window)||Notification.permission!=='granted')return;
@@ -654,17 +838,30 @@ function checkNotifs(){
   evs.forEach(e=>{
     if(e.who!=='both'&&e.who!==role)return;
     const s=new Date(e.date+'T'+e.time),ms=s-now;
-    if(prefs.r30&&ms>0&&ms<=31*60*1000&&ms>29*60*1000){const k=e.id+'_30';if(!notM[k]){notM[k]=true;sessionStorage.setItem(NK,JSON.stringify(notM));try{new Notification('⏰ 30分後',{body:e.title});}catch(_){}showT('⏰ リマインダー',`${e.title}は30分後に開始します`);}}
-    if(prefs.rAt&&ms>=-60*1000&&ms<=60*1000){const k=e.id+'_at';if(!notM[k]){notM[k]=true;sessionStorage.setItem(NK,JSON.stringify(notM));try{new Notification('🔔 今から開始！',{body:e.title});}catch(_){}showT('🔔 開始！',`${e.title}が開始されます！`);}}
+    if(prefs.r30&&ms>0&&ms<=31*60*1000&&ms>29*60*1000){
+      const k=e.id+'_30';
+      if(!notM[k]){notM[k]=true;sessionStorage.setItem(NK,JSON.stringify(notM));
+        try{new Notification('⏰ 30分後',{body:e.title});}catch(_){}
+        showT('⏰ リマインダー',`${e.title}は30分後に開始します`);}
+    }
+    if(prefs.rAt&&ms>=-60*1000&&ms<=60*1000){
+      const k=e.id+'_at';
+      if(!notM[k]){notM[k]=true;sessionStorage.setItem(NK,JSON.stringify(notM));
+        try{new Notification('🔔 今から開始！',{body:e.title});}catch(_){}
+        showT('🔔 開始！',`${e.title}が開始されます！`);}
+    }
   });
 }
 
-// TOAST
+// ── TOAST ─────────────────────────────────────────────────
 function showT(title,body){
   const w=document.getElementById('twWrap'),d=document.createElement('div');
-  d.className='toast';d.innerHTML=`<div class="toast-t">${esc(title)}</div><div class="toast-b">${esc(body)}</div>`;
+  d.className='toast';
+  d.innerHTML=`<div class="toast-t">${esc(title)}</div><div class="toast-b">${esc(body)}</div>`;
   w.appendChild(d);setTimeout(()=>d.remove(),4500);
 }
+
+// ── THEME ─────────────────────────────────────────────────
 function setTheme(t){
   document.documentElement.setAttribute('data-theme',t==='pastel'?'':t);
   localStorage.setItem('theme',t);
@@ -676,18 +873,13 @@ function loadTheme(){
   document.documentElement.setAttribute('data-theme',t==='pastel'?'':t);
 }
 
-// THEME
-function setTheme(t){
-  document.documentElement.setAttribute('data-theme',t==='pastel'?'':t);
-  localStorage.setItem('theme',t);
-  if(document.querySelector('.tab.active')?.textContent.toLowerCase().includes('设置')||document.querySelector('.tab.active')?.textContent.toLowerCase().includes('設定'))renderSettings();
-}
-function loadTheme(){
-  const t=localStorage.getItem('theme')||'pastel';
-  document.documentElement.setAttribute('data-theme',t==='pastel'?'':t);
-}
-if(role){launchApp();if(code)setTimeout(()=>doSyncFull(false),800);}
+// ── INIT ──────────────────────────────────────────────────
+ld();
 loadTheme();
+if(role && gasUrl){
+  launchApp();
+  setTimeout(()=>doSyncFull(false),800);
+}
 </script>
 </body>
 </html>
