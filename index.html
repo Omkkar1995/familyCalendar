@@ -1,21 +1,27 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ja">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 <meta name="theme-color" content="#0d0c18">
 <meta name="apple-mobile-web-app-capable" content="yes">
-<title>Our Schedule</title>
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;1,400&family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet">
+<title>私たちのスケジュール</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=BIZ+UDPGothic&display=swap" rel="stylesheet">
 <style>
-:root{--bg:#0d0c18;--s1:#16152a;--s2:#1e1d33;--s3:#262540;--s4:#2e2c4d;--border:rgba(255,255,255,0.07);--border2:rgba(255,255,255,0.13);--text:#f0eeff;--muted:rgba(240,238,255,0.55);--dim:rgba(240,238,255,0.3);--husband:#7eb8f7;--hbg:rgba(126,184,247,0.12);--hbd:rgba(126,184,247,0.25);--wife:#f78eb8;--wbg:rgba(247,142,184,0.12);--wbd:rgba(247,142,184,0.25);--both:#c4a7f7;--bbg:rgba(196,167,247,0.12);--bbd:rgba(196,167,247,0.25);--gold:#f0c96a;--green:#6be8a7;--red:#f07878;--r:14px;--rs:10px;--rx:7px;--ff:'Outfit',sans-serif;--fd:'Playfair Display',serif}
+:root{--bg:#FAF9FC;--s1:#F5F3F9;--s2:#F0EBF7;--s3:#E8E0F0;--s4:#DDD3E8;--border:rgba(176,169,201,0.2);--border2:rgba(176,169,201,0.35);--text:#2D1B4E;--muted:#6B5B7D;--dim:#9D8FB5;--husband:#6BA3D9;--hbg:rgba(107,163,217,0.15);--hbd:rgba(107,163,217,0.3);--wife:#E89AA8;--wbg:rgba(232,154,168,0.15);--wbd:rgba(232,154,168,0.3);--both:#C4A7D9;--bbg:rgba(196,167,217,0.15);--bbd:rgba(196,167,217,0.3);--gold:#D9A854;--green:#4DB87F;--red:#D97B7B;--r:14px;--rs:10px;--rx:7px;--ff:'BIZ UDPGothic',sans-serif;--fd:'BIZ UDPGothic',sans-serif}
+[data-theme="dark"]{--bg:#0d0c18;--s1:#16152a;--s2:#1e1d33;--s3:#262540;--s4:#2e2c4d;--border:rgba(255,255,255,0.07);--border2:rgba(255,255,255,0.13);--text:#f0eeff;--muted:rgba(240,238,255,0.55);--dim:rgba(240,238,255,0.3);--husband:#7eb8f7;--hbg:rgba(126,184,247,0.12);--hbd:rgba(126,184,247,0.25);--wife:#f78eb8;--wbg:rgba(247,142,184,0.12);--wbd:rgba(247,142,184,0.25);--both:#c4a7f7;--bbg:rgba(196,167,247,0.12);--bbd:rgba(196,167,247,0.25);--gold:#f0c96a;--green:#6be8a7;--red:#f07878}
+[data-theme="light"]{--bg:#FFFFFF;--s1:#F8F8FB;--s2:#F0F0F5;--s3:#E8E8F0;--s4:#DDD3E8;--border:rgba(176,169,201,0.15);--border2:rgba(176,169,201,0.25);--text:#1A1A2E;--muted:#4A4A6B;--dim:#7B7B9B;--husband:#4A90E2;--hbg:rgba(74,144,226,0.12);--hbd:rgba(74,144,226,0.25);--wife:#E85B7D;--wbg:rgba(232,91,125,0.12);--wbd:rgba(232,91,125,0.25);--both:#B895D9;--bbg:rgba(184,149,217,0.12);--bbd:rgba(184,149,217,0.25);--gold:#D4A545;--green:#3DA575;--red:#D97B7B}
+[data-theme="dark"]{--bg:#0d0c18;--s1:#16152a;--s2:#1e1d33;--s3:#262540;--s4:#2e2c4d;--border:rgba(255,255,255,0.07);--border2:rgba(255,255,255,0.13);--text:#f0eeff;--muted:rgba(240,238,255,0.55);--dim:rgba(240,238,255,0.3);--husband:#7eb8f7;--hbg:rgba(126,184,247,0.12);--hbd:rgba(126,184,247,0.25);--wife:#f78eb8;--wbg:rgba(247,142,184,0.12);--wbd:rgba(247,142,184,0.25);--both:#c4a7f7;--bbg:rgba(196,167,247,0.12);--bbd:rgba(196,167,247,0.25);--gold:#f0c96a;--green:#6be8a7;--red:#f07878}
+[data-theme="light"]{--bg:#FFFFFF;--s1:#F8F8FB;--s2:#F0F0F5;--s3:#E8E8F0;--s4:#DDD3E8;--border:rgba(176,169,201,0.15);--border2:rgba(176,169,201,0.25);--text:#1A1A2E;--muted:#4A4A6B;--dim:#7B7B9B;--husband:#4A90E2;--hbg:rgba(74,144,226,0.12);--hbd:rgba(74,144,226,0.25);--wife:#E85B7D;--wbg:rgba(232,91,125,0.12);--wbd:rgba(232,91,125,0.25);--both:#B895D9;--bbg:rgba(184,149,217,0.12);--bbd:rgba(184,149,217,0.25);--gold:#D4A545;--green:#3DA575;--red:#D97B7B}
 *{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
-body{background:var(--bg);color:var(--text);font-family:var(--ff);font-size:15px;min-height:100vh;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+body{background:var(--bg);color:var(--text);font-family:var(--ff);font-size:17px;min-height:100vh;-webkit-font-smoothing:antialiased;overflow-x:hidden;background-image:radial-gradient(circle at 20% 80%, rgba(255,183,197,0.08) 0%, transparent 50%),radial-gradient(circle at 80% 20%, rgba(255,183,197,0.06) 0%, transparent 50%),radial-gradient(circle at 40% 40%, rgba(196,167,217,0.05) 0%, transparent 50%);background-attachment:fixed}
 
 .onboard{position:fixed;inset:0;background:var(--bg);z-index:9999;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:28px 22px;gap:18px;overflow-y:auto}
-.ob-logo{font-family:var(--fd);font-size:34px;color:var(--text);text-align:center;line-height:1.2}
+.ob-logo{font-family:var(--fd);font-size:34px;color:#FFB7C5;text-align:center;line-height:1.2}
 .ob-logo em{color:var(--gold);font-style:italic}
-.ob-sub{font-size:14px;color:var(--muted);text-align:center;max-width:280px;line-height:1.6}
+.ob-sub{font-size:16px;color:var(--muted);text-align:center;max-width:280px;line-height:1.6}
 .role-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;width:100%;max-width:330px}
 .role-card{background:var(--s2);border:1.5px solid var(--border2);border-radius:var(--r);padding:22px 14px;text-align:center;cursor:pointer;transition:all .2s}
 .role-card.rh:hover,.role-card.rh.sel{border-color:var(--husband);background:var(--hbg)}
@@ -51,7 +57,7 @@ body{background:var(--bg);color:var(--text);font-family:var(--ff);font-size:15px
 .av-w{background:var(--wbg);border:1.5px solid var(--wife)}
 
 .tabs{background:var(--s1);border-bottom:1px solid var(--border);display:flex;padding:0 15px;gap:3px}
-.tab{flex:1;padding:10px 5px;background:none;border:none;color:var(--dim);font-family:var(--ff);font-size:13px;font-weight:500;cursor:pointer;border-bottom:2px solid transparent;transition:all .2s;text-align:center}
+.tab{flex:1;padding:10px 5px;background:none;border:none;color:var(--dim);font-family:var(--ff);font-size:14px;font-weight:500;cursor:pointer;border-bottom:2px solid transparent;transition:all .2s;text-align:center}
 .tab.active{color:var(--gold);border-bottom-color:var(--gold)}
 
 .main{max-width:600px;margin:0 auto;padding:15px 13px 100px}
@@ -60,10 +66,10 @@ body{background:var(--bg);color:var(--text);font-family:var(--ff);font-size:15px
 .vt{flex:1;padding:8px;background:none;border:none;border-radius:8px;color:var(--muted);font-family:var(--ff);font-size:12px;font-weight:600;cursor:pointer;transition:all .2s;text-align:center}
 .vt.active{background:var(--s4);color:var(--text)}
 
-.hero{background:var(--s2);border:1px solid var(--border2);border-radius:var(--r);padding:17px;margin-bottom:14px;position:relative;overflow:hidden}
+.hero{background:linear-gradient(135deg, rgba(255,183,197,0.12) 0%, rgba(255,200,220,0.08) 100%);border:1px solid rgba(255,183,197,0.3);border-radius:var(--r);padding:17px;margin-bottom:14px;position:relative;overflow:hidden}
 .hero::after{content:'';position:absolute;top:-40px;right:-40px;width:120px;height:120px;background:radial-gradient(circle,rgba(196,167,247,.1) 0%,transparent 70%);border-radius:50%;pointer-events:none}
 .hero-lbl{font-size:10px;text-transform:uppercase;letter-spacing:1.5px;color:var(--gold);font-weight:700;margin-bottom:2px}
-.hero-title{font-family:var(--fd);font-size:23px;line-height:1.2}
+.hero-title{font-family:var(--fd);font-size:26px;line-height:1.2}
 .hero-sub{font-size:12px;color:var(--muted);margin-top:3px}
 .next-up{margin-top:11px;background:rgba(196,167,247,.07);border:1px solid rgba(196,167,247,.2);border-radius:var(--rx);padding:9px 12px;display:flex;align-items:center;gap:9px}
 .nu-dot{width:7px;height:7px;background:var(--both);border-radius:50%;flex-shrink:0;animation:pulse 2s infinite}
@@ -98,7 +104,7 @@ body{background:var(--bg);color:var(--text);font-family:var(--ff);font-size:15px
 .ev-tp{font-size:10px;color:var(--dim);font-weight:700;text-transform:uppercase}
 .ev-sep{width:1px;background:var(--border);align-self:stretch;flex-shrink:0;margin:1px 0}
 .ev-b{flex:1;min-width:0}
-.ev-tit{font-size:14px;font-weight:600;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;margin-bottom:2px}
+.ev-tit{font-size:16px;font-weight:600;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;margin-bottom:2px}
 .ev-note{font-size:12px;color:var(--muted);margin-bottom:5px;line-height:1.4}
 .tags{display:flex;flex-wrap:wrap;gap:4px}
 .tag{font-size:10px;padding:2px 7px;border-radius:20px;font-weight:700;letter-spacing:.2px}
@@ -165,100 +171,113 @@ body{background:var(--bg);color:var(--text);font-family:var(--ff);font-size:15px
 .si-row{display:flex;align-items:center;justify-content:space-between;padding:5px 0}
 .si-lbl{font-size:12px;color:var(--dim)}
 .si-val{font-size:13px;font-weight:600}
-.code-copy{background:var(--s3);border:1px solid var(--border2);border-radius:var(--rx);padding:4px 10px;font-size:12px;font-weight:700;letter-spacing:2px;color:var(--gold);cursor:pointer;font-family:monospace}
+.theme-btn{padding:8px 14px;background:var(--s2);border:1.5px solid var(--border2);border-radius:var(--rs);color:var(--muted);font-size:13px;font-weight:600;cursor:pointer;text-align:center;transition:all .2s;white-space:nowrap}
+.theme-btn.active{background:var(--gold);border-color:var(--gold);color:#140f00}
+.theme-btn:hover{border-color:var(--gold)}
 
 @media(max-width:370px){.frow{grid-template-columns:1fr}.split{grid-template-columns:1fr}}
+.theme-btn{padding:8px 14px;background:var(--s2);border:1.5px solid var(--border2);border-radius:var(--rs);color:var(--muted);font-size:13px;font-weight:600;cursor:pointer;text-align:center;transition:all .2s;white-space:nowrap}
+.theme-btn.active{background:var(--gold);border-color:var(--gold);color:#140f00}
+.theme-btn:hover{border-color:var(--gold)}
 </style>
 </head>
 <body>
 
 <!-- ONBOARDING -->
 <div class="onboard" id="onboard">
-  <div class="ob-logo">Our <em>Schedule</em><br><span style="font-size:16px;color:var(--muted);font-family:var(--ff);font-weight:300">for two ♥</span></div>
-  <div class="ob-sub">A shared family schedule — see each other's plans and get reminders together.</div>
+  <div class="ob-logo">私たちの<em>スケジュール</em><br><span style="font-size:16px;color:var(--muted);font-family:var(--ff);font-weight:300">二人のために ♥</span></div>
+  <div class="ob-sub">共有家族スケジュール — 互いの予定を確認し、リマインダーを一緒に受け取ります。</div>
   <div class="role-grid">
     <div class="role-card rh" onclick="selectRole('husband')">
       <div class="role-icon">👨</div>
-      <div class="role-name" style="color:var(--husband)">Husband</div>
-      <div class="role-desc">Blue events</div>
+      <div class="role-name" style="color:var(--husband)">Omi</div>
+      <div class="role-desc">青いイベント</div>
     </div>
     <div class="role-card rw" onclick="selectRole('wife')">
       <div class="role-icon">👩</div>
-      <div class="role-name" style="color:var(--wife)">Wife</div>
-      <div class="role-desc">Pink events</div>
+      <div class="role-name" style="color:var(--wife)">Yumi</div>
+      <div class="role-desc">ピンクのイベント</div>
     </div>
   </div>
   <div class="sync-sec" id="syncSec" style="display:none">
     <div id="syncContent"></div>
   </div>
-  <button class="ob-btn" id="obBtn" onclick="finishOnboard()">Get Started</button>
-  <span class="ob-link" id="obSkip" style="display:none" onclick="skipPairing()">Skip pairing for now</span>
+  <button class="ob-btn" id="obBtn" onclick="finishOnboard()">開始する</button>
+  <span class="ob-link" id="obSkip" style="display:none" onclick="skipPairing()">ペアリングをスキップ</span>
 </div>
 
 <div class="tw-wrap" id="twWrap"></div>
 
 <header class="header" id="hdr" style="display:none">
-  <div class="logo">Our <em>Schedule</em></div>
+  <div class="logo">私たちの<em>スケジュール</em></div>
   <div class="hdr-right">
-    <div class="sync-pill" id="spill" onclick="doSync()"><div class="sdot"></div><span id="spillTxt">Sync</span></div>
+    <div class="sync-pill" id="spill" onclick="doSync()"><div class="sdot"></div><span id="spillTxt">同期</span></div>
     <div class="avatar" id="myAv"></div>
   </div>
 </header>
 
 <div class="tabs" id="tabs" style="display:none">
-  <button class="tab active" onclick="sw('today',this)">Today</button>
-  <button class="tab" onclick="sw('upcoming',this)">Upcoming</button>
-  <button class="tab" onclick="sw('settings',this)">Settings</button>
+  <button class="tab active" onclick="sw('today',this)">今日</button>
+  <button class="tab" onclick="sw('upcoming',this)">今後</button>
+  <button class="tab" onclick="sw('settings',this)">設定</button>
 </div>
 
 <div class="main" id="mainArea" style="display:none">
   <div id="tab-today">
     <div class="hero">
-      <div class="hero-lbl">Today</div>
+      <div class="hero-lbl">今日</div>
       <div class="hero-title" id="heroTitle"></div>
       <div class="hero-sub" id="heroSub"></div>
       <div class="next-up" id="nextUp" style="display:none">
         <div class="nu-dot"></div>
-        <div><span class="nu-lbl">Next up</span><span class="nu-txt" id="nuTxt"></span></div>
+        <div><span class="nu-lbl">次のイベント</span><span class="nu-txt" id="nuTxt"></span></div>
       </div>
     </div>
     <div class="vtog">
-      <button class="vt active" id="vt1" onclick="setV('c')">📋 Combined</button>
-      <button class="vt" id="vt2" onclick="setV('s')">👨👩 Side by Side</button>
+      <button class="vt active" id="vt1" onclick="setV('c')">📋 統合</button>
+      <button class="vt" id="vt2" onclick="setV('s')">👨👩 並べて表示</button>
     </div>
     <div id="tComb"></div>
     <div id="tSplit" style="display:none"></div>
   </div>
   <div id="tab-upcoming" style="display:none">
     <div class="vtog">
-      <button class="vt active" id="uv1" onclick="setUV('c')">📋 Combined</button>
-      <button class="vt" id="uv2" onclick="setUV('s')">👨👩 Side by Side</button>
+      <button class="vt active" id="uv1" onclick="setUV('c')">📋 統合</button>
+      <button class="vt" id="uv2" onclick="setUV('s')">👨👩 並べて表示</button>
     </div>
     <div id="uContent"></div>
   </div>
   <div id="tab-settings" style="display:none">
-    <div class="slbl2">My Profile</div>
+    <div class="slbl2">マイプロフィール</div>
     <div class="si" id="profCard"></div>
-    <div class="slbl2">Sync</div>
+    <div class="slbl2">同期</div>
     <div class="si" id="syncCard"></div>
-    <div class="slbl2">Notifications</div>
+    <div class="slbl2">テーマ</div>
+    <div class="sc">
+      <div class="tr" style="border-top:none;padding-top:0;flex-wrap:wrap;gap:8px;justify-content:flex-start">
+        <div class="theme-btn active" data-theme="pastel" onclick="setTheme('pastel')">🌸 Pastel</div>
+        <div class="theme-btn" data-theme="dark" onclick="setTheme('dark')">🌙 Dark</div>
+        <div class="theme-btn" data-theme="light" onclick="setTheme('light')">☀️ Light</div>
+      </div>
+    </div>
+    <div class="slbl2">通知</div>
     <div id="notifBar"></div>
     <div class="sc">
-      <div class="shdr">Reminders</div>
+      <div class="shdr">リマインダー</div>
       <div class="tr" style="border-top:none;padding-top:0">
-        <span class="trl">30 min before</span>
+        <span class="trl">30分前</span>
         <div class="tog on" id="t30" onclick="tp('r30')"></div>
       </div>
       <div class="tr">
-        <span class="trl">At event time</span>
+        <span class="trl">イベント開始時</span>
         <div class="tog on" id="tAt" onclick="tp('rAt')"></div>
       </div>
     </div>
-    <div class="slbl2">Data</div>
+    <div class="slbl2">データ</div>
     <div class="sc">
-      <div class="tr" style="border-top:none;padding-top:0"><span class="trl">Clear past events</span><button class="dbtn" onclick="clearPast()">Clear</button></div>
-      <div class="tr"><span class="trl">Delete all events</span><button class="dbtn" onclick="clearAll()">Delete All</button></div>
-      <div class="tr"><span class="trl">Reset &amp; re-pair</span><button class="dbtn" onclick="resetApp()">Reset</button></div>
+      <div class="tr" style="border-top:none;padding-top:0"><span class="trl">過去のイベントをクリア</span><button class="dbtn" onclick="clearPast()">クリア</button></div>
+      <div class="tr"><span class="trl">全イベント削除</span><button class="dbtn" onclick="clearAll()">すべて削除</button></div>
+      <div class="tr"><span class="trl">リセット＆再ペアリング</span><button class="dbtn" onclick="resetApp()">リセット</button></div>
     </div>
   </div>
 </div>
@@ -268,37 +287,37 @@ body{background:var(--bg);color:var(--text);font-family:var(--ff);font-size:15px
 <div class="mbg" id="mbg" onclick="bgClick(event)">
   <div class="modal">
     <div class="mhandle"></div>
-    <div class="mtitle" id="mtitle">Add Event</div>
-    <div class="fg"><label class="fl">Title</label><input class="fi" id="et" type="text" placeholder="e.g. Doctor appointment" maxlength="60"></div>
-    <div class="fg"><label class="fl">Notes (optional)</label><textarea class="fta" id="en" placeholder="Details…" maxlength="200"></textarea></div>
+    <div class="mtitle" id="mtitle">イベント追加</div>
+    <div class="fg"><label class="fl">タイトル</label><input class="fi" id="et" type="text" placeholder="例：歯医者の予約" maxlength="60"></div>
+    <div class="fg"><label class="fl">メモ（任意）</label><textarea class="fta" id="en" placeholder="詳細…" maxlength="200"></textarea></div>
     <div class="frow">
-      <div class="fg"><label class="fl">Date</label><input class="fi" id="ed" type="date"></div>
-      <div class="fg"><label class="fl">Time</label><input class="fi" id="eti" type="time"></div>
+      <div class="fg"><label class="fl">日付</label><input class="fi" id="ed" type="date"></div>
+      <div class="fg"><label class="fl">時間</label><input class="fi" id="eti" type="time"></div>
     </div>
     <div class="frow">
-      <div class="fg"><label class="fl">Category</label>
+      <div class="fg"><label class="fl">カテゴリ</label>
         <select class="fsel" id="ec">
-          <option value="general">📋 General</option>
-          <option value="medical">🏥 Medical</option>
-          <option value="work">💼 Work</option>
-          <option value="social">🎉 Social</option>
-          <option value="errand">🛒 Errand</option>
-          <option value="family">👨‍👩‍👧 Family</option>
-          <option value="sport">🏃 Sport</option>
-          <option value="travel">✈️ Travel</option>
+          <option value="general">📋 一般</option>
+          <option value="medical">🏥 医療</option>
+          <option value="work">💼 仕事</option>
+          <option value="social">🎉 社交</option>
+          <option value="errand">🛒 用事</option>
+          <option value="family">👨‍👩‍👧 家族</option>
+          <option value="sport">🏃 スポーツ</option>
+          <option value="travel">✈️ 旅行</option>
         </select>
       </div>
-      <div class="fg"><label class="fl">Duration (min)</label><input class="fi" id="edu" type="number" min="5" max="480" value="60"></div>
+      <div class="fg"><label class="fl">所要時間（分）</label><input class="fi" id="edu" type="number" min="5" max="480" value="60"></div>
     </div>
     <div class="fg">
-      <label class="fl">Who</label>
+      <label class="fl">対象者</label>
       <div class="who-g">
-        <div class="wp sh" data-w="husband" onclick="pw('husband')">👨 Husband</div>
-        <div class="wp" data-w="wife" onclick="pw('wife')">👩 Wife</div>
+        <div class="wp sh" data-w="husband" onclick="pw('husband')">👨 Omi</div>
+        <div class="wp" data-w="wife" onclick="pw('wife')">👩 Yumi</div>
         <div class="wp" data-w="both" onclick="pw('both')">💑 Both</div>
       </div>
     </div>
-    <button class="bsub" id="msub" onclick="saveEv()">Add to Schedule</button>
+    <button class="bsub" id="msub" onclick="saveEv()">スケジュールに追加</button>
   </div>
 </div>
 
@@ -335,27 +354,27 @@ function renderSS(){
   const el=document.getElementById('syncContent');
   if(obMode==='create'){
     if(!genCode) genCode=mkCode();
-    el.innerHTML=`<span class="slbl">Your pair code — share with your spouse</span>
+    el.innerHTML=`<span class="slbl">あなたのペアコード — パートナーと共有してください</span>
     <div class="code-display" onclick="copyCode('${genCode}')">
       <div class="code-val">${genCode}</div>
-      <div class="code-hint">👆 Tap to copy &bull; Your spouse enters this when they open the app on their phone</div>
+      <div class="code-hint">👆 タップしてコピー • パートナーがアプリを開く際にこのコードを入力します</div>
     </div>
-    <div style="text-align:center;margin-top:10px"><span class="ob-link" onclick="swOB('join')">My spouse already created a code →</span></div>`;
+    <div style="text-align:center;margin-top:10px"><span class="ob-link" onclick="swOB('join')">パートナーがコードを作成済み →</span></div>`;
   } else {
-    el.innerHTML=`<span class="slbl">Enter your spouse's pair code</span>
+    el.innerHTML=`<span class="slbl">パートナーのペアコードを入力</span>
     <input class="sync-inp" id="obCI" type="text" maxlength="6" placeholder="ABC123" oninput="this.value=this.value.toUpperCase().replace(/[^A-Z0-9]/g,'')">
-    <div style="text-align:center;margin-top:10px"><span class="ob-link" onclick="swOB('create')">← Create a new code instead</span></div>`;
+    <div style="text-align:center;margin-top:10px"><span class="ob-link" onclick="swOB('create')">← 新規コードを作成</span></div>`;
   }
 }
 function swOB(m){obMode=m;if(m==='create')genCode=mkCode();renderSS();}
-function copyCode(c){navigator.clipboard?.writeText(c).then(()=>showT('Copied!','Share this code with your spouse.'));}
+function copyCode(c){navigator.clipboard?.writeText(c).then(()=>showT('コピー完了！','パートナーと共有してください。'));}
 function skipPairing(){role=obRole;localStorage.setItem(RK,role);launchApp();}
 function finishOnboard(){
   if(!obRole)return;
   role=obRole;
   localStorage.setItem(RK,role);
   if(obMode==='create'){code=genCode;}
-  else{const v=document.getElementById('obCI')?.value.trim()||'';if(v.length<4){showT('Enter code','Please enter your spouse\'s pair code.');return;}code=v;}
+  else{const v=document.getElementById('obCI')?.value.trim()||'';if(v.length<4){showT('コード入力','パートナーのペアコードを入力してください。');return;}code=v;}
   if(code) localStorage.setItem(SYK,code);
   launchApp();
   if(code) setTimeout(()=>doSyncFull(true),900);
@@ -394,8 +413,8 @@ function isToday(d){return d===todayS();}
 function isFut(d){return d>todayS();}
 function isPast(e){const n=new Date(),end=new Date(e.date+'T'+e.time);end.setMinutes(end.getMinutes()+(e.duration||60));return end<n;}
 function isNow(e){const n=new Date(),s=new Date(e.date+'T'+e.time),en=new Date(e.date+'T'+e.time);en.setMinutes(en.getMinutes()+(e.duration||60));return n>=s&&n<=en;}
-function fmt12(t){if(!t)return{v:'',p:''};const[h,m]=t.split(':').map(Number);return{v:`${h%12||12}:${String(m).padStart(2,'0')}`,p:h>=12?'PM':'AM'};}
-function fmtD(d){const dt=new Date(d+'T00:00:00');const days=['Sun','Mon','Tue','Wed','Thu','Fri','Sat'],mos=['January','February','March','April','May','June','July','August','September','October','November','December'];return`${days[dt.getDay()]}, ${mos[dt.getMonth()]} ${dt.getDate()}`;}
+function fmt12(t){if(!t)return{v:'',p:''};const[h,m]=t.split(':').map(Number);return{v:`${h%12||12}:${String(m).padStart(2,'0')}`,p:h>=12?'午後':'午前'};}
+function fmtD(d){const dt=new Date(d+'T00:00:00');const days=['日','月','火','水','木','金','土'],mos=['1月','2月','3月','4月','5月','6月','7月','8月','9月','10月','11月','12月'];return`${mos[dt.getMonth()]}${dt.getDate()}日（${days[dt.getDay()]}）`;}
 function dDiff(d){return Math.round((new Date(d+'T00:00:00')-new Date(todayS()+'T00:00:00'))/86400000);}
 function canEdit(e){return e.owner===role;}
 function evCls(e){
@@ -406,7 +425,7 @@ function evCls(e){
 
 function buildCard(e){
   const t=fmt12(e.time);
-  const wl=e.who==='husband'?'👨 Husband':e.who==='wife'?'👩 Wife':'💑 Both';
+  const wl=e.who==='husband'?'👨 Omi':e.who==='wife'?'👩 Yumi':'💑 Both';
   const tc=e.who==='husband'?'th':e.who==='wife'?'tw':'tb';
   const ok=canEdit(e);
   return`<div class="${evCls(e)}" data-id="${e.id}">
@@ -417,13 +436,13 @@ function buildCard(e){
       ${e.note?`<div class="ev-note">${esc(e.note)}</div>`:''}
       <div class="tags">
         <span class="tag ${tc}">${wl}</span>
-        <span class="tag tc">${EMO[e.cat]||'📋'} ${e.cat||'general'}</span>
-        ${e.duration?`<span class="tag tc">⏱ ${e.duration}m</span>`:''}
+        <span class="tag tc">${EMO[e.cat]||'📋'} ${e.cat==='general'?'一般':e.cat==='medical'?'医療':e.cat==='work'?'仕事':e.cat==='social'?'社交':e.cat==='errand'?'用事':e.cat==='family'?'家族':e.cat==='sport'?'スポーツ':e.cat==='travel'?'旅行':'一般'}</span>
+        ${e.duration?`<span class="tag tc">⏱ ${e.duration}分</span>`:''}
       </div>
     </div>
     <div class="ev-acts">
-      <div class="ico${ok?'':' off'}" onclick="${ok?`editE('${e.id}')`:''}" title="${ok?'Edit':'Owner only'}">✏️</div>
-      <div class="ico del${ok?'':' off'}" onclick="${ok?`delE('${e.id}')`:''}" title="${ok?'Delete':'Owner only'}">🗑</div>
+      <div class="ico${ok?'':' off'}" onclick="${ok?`editE('${e.id}')`:''}" title="${ok?'編集':'所有者のみ'}">✏️</div>
+      <div class="ico del${ok?'':' off'}" onclick="${ok?`delE('${e.id}')`:''}" title="${ok?'削除':'所有者のみ'}">🗑</div>
     </div>
   </div>`;
 }
@@ -434,7 +453,7 @@ function buildMini(e){
   return`<div class="mini${p?' past':''}${a?' active-now':''}">
     <div class="mini-time">${t.v} ${t.p}</div>
     <div class="mini-title">${esc(e.title)}</div>
-    <div class="mini-cat">${EMO[e.cat]||'📋'} ${e.duration||60}min</div>
+    <div class="mini-cat">${EMO[e.cat]||'📋'} ${e.duration||60}分</div>
   </div>`;
 }
 
@@ -443,29 +462,29 @@ function emptyHtml(txt){return`<div class="empty"><div class="empty-ico">🗓</d
 // RENDER TODAY
 function renderToday(){
   const n=new Date();
-  const days=['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday'];
-  const mos=['January','February','March','April','May','June','July','August','September','October','November','December'];
-  document.getElementById('heroTitle').textContent=`${days[n.getDay()]}, ${mos[n.getMonth()]} ${n.getDate()}`;
+  const days=['日曜日','月曜日','火曜日','水曜日','木曜日','金曜日','土曜日'];
+  const mos=['1月','2月','3月','4月','5月','6月','7月','8月','9月','10月','11月','12月'];
+  document.getElementById('heroTitle').textContent=`${mos[n.getMonth()]}${n.getDate()}日（${days[n.getDay()]}）`;
   const te=evs.filter(e=>isToday(e.date)).sort((a,b)=>a.time.localeCompare(b.time));
-  document.getElementById('heroSub').textContent=te.length===0?'Nothing scheduled today':`${te.length} event${te.length!==1?'s':''} today`;
+  document.getElementById('heroSub').textContent=te.length===0?'今日は予定がありません':`本日${te.length}件のイベント`;
   const act=te.find(e=>isNow(e)),nxt=te.find(e=>!isPast(e)&&!isNow(e));
   const nb=document.getElementById('nextUp');
-  if(act){nb.style.display='flex';document.getElementById('nuTxt').textContent=`Happening now: ${act.title}`;}
-  else if(nxt){nb.style.display='flex';const t=fmt12(nxt.time);document.getElementById('nuTxt').textContent=`${nxt.title} at ${t.v} ${t.p}`;}
+  if(act){nb.style.display='flex';document.getElementById('nuTxt').textContent=`実行中: ${act.title}`;}
+  else if(nxt){nb.style.display='flex';const t=fmt12(nxt.time);document.getElementById('nuTxt').textContent=`${nxt.title}は${t.v} ${t.p}`;}
   else nb.style.display='none';
 
   if(tv==='c'){
     document.getElementById('tComb').style.display='';
     document.getElementById('tSplit').style.display='none';
-    document.getElementById('tComb').innerHTML=te.length===0?emptyHtml('No events today.<br>Tap + to add one!'):`<div class="slbl2">Today's Events</div><div class="evlist">${te.map(e=>buildCard(e)).join('')}</div>`;
+    document.getElementById('tComb').innerHTML=te.length===0?emptyHtml('本日イベントなし<br>+をタップして追加！'):`<div class="slbl2">本日のイベント</div><div class="evlist">${te.map(e=>buildCard(e)).join('')}</div>`;
   } else {
     document.getElementById('tComb').style.display='none';
     document.getElementById('tSplit').style.display='';
     const he=te.filter(e=>e.who==='husband'||e.who==='both');
     const we=te.filter(e=>e.who==='wife'||e.who==='both');
     document.getElementById('tSplit').innerHTML=`<div class="split">
-      <div><div class="col-hdr"><div class="col-dot" style="background:var(--husband)"></div><div class="col-name" style="color:var(--husband)">Husband</div></div>${he.length?he.map(e=>buildMini(e)).join(''):'<div style="font-size:11px;color:var(--dim);padding:6px 0">Nothing yet</div>'}</div>
-      <div><div class="col-hdr"><div class="col-dot" style="background:var(--wife)"></div><div class="col-name" style="color:var(--wife)">Wife</div></div>${we.length?we.map(e=>buildMini(e)).join(''):'<div style="font-size:11px;color:var(--dim);padding:6px 0">Nothing yet</div>'}</div>
+      <div><div class="col-hdr"><div class="col-dot" style="background:var(--husband)"></div><div class="col-name" style="color:var(--husband)">Omi</div></div>${he.length?he.map(e=>buildMini(e)).join(''):'<div style="font-size:11px;color:var(--dim);padding:6px 0">No events</div>'}</div>
+      <div><div class="col-hdr"><div class="col-dot" style="background:var(--wife)"></div><div class="col-name" style="color:var(--wife)">Yumi</div></div>${we.length?we.map(e=>buildMini(e)).join(''):'<div style="font-size:11px;color:var(--dim);padding:6px 0">No events</div>'}</div>
     </div>`;
   }
 }
@@ -474,13 +493,13 @@ function renderToday(){
 function renderUpcoming(){
   const cont=document.getElementById('uContent');
   const fe=evs.filter(e=>isFut(e.date)).sort((a,b)=>(a.date+a.time).localeCompare(b.date+b.time));
-  if(!fe.length){cont.innerHTML=emptyHtml('No upcoming events.<br>Plan something fun!');return;}
+  if(!fe.length){cont.innerHTML=emptyHtml('今後のイベントなし<br>何か楽しい予定を立ててみませんか！');return;}
   const gr={};
   fe.forEach(e=>{if(!gr[e.date])gr[e.date]=[];gr[e.date].push(e);});
   let html='';
   Object.keys(gr).sort().forEach(d=>{
     const df=dDiff(d);
-    const badge=df===1?'<span class="up-badge">Tomorrow</span>':df<=7?`<span class="up-badge">In ${df} days</span>`:'';
+    const badge=df===1?'<span class="up-badge">明日</span>':df<=7?`<span class="up-badge">${df}日後</span>`:'';
     if(uv==='c'){
       html+=`<div class="up-day"><div class="up-hdr"><div class="up-name">${fmtD(d)}</div>${badge}</div><div class="evlist">${gr[d].map(e=>buildCard(e)).join('')}</div></div>`;
     } else {
@@ -488,8 +507,8 @@ function renderUpcoming(){
       const we=gr[d].filter(e=>e.who==='wife'||e.who==='both');
       html+=`<div class="up-day"><div class="up-hdr"><div class="up-name">${fmtD(d)}</div>${badge}</div>
         <div class="split">
-          <div><div class="col-hdr"><div class="col-dot" style="background:var(--husband)"></div><div class="col-name" style="color:var(--husband)">Husband</div></div>${he.length?he.map(e=>buildMini(e)).join(''):'<div style="font-size:11px;color:var(--dim)">—</div>'}</div>
-          <div><div class="col-hdr"><div class="col-dot" style="background:var(--wife)"></div><div class="col-name" style="color:var(--wife)">Wife</div></div>${we.length?we.map(e=>buildMini(e)).join(''):'<div style="font-size:11px;color:var(--dim)">—</div>'}</div>
+          <div><div class="col-hdr"><div class="col-dot" style="background:var(--husband)"></div><div class="col-name" style="color:var(--husband)">Omi</div></div>${he.length?he.map(e=>buildMini(e)).join(''):'<div style="font-size:11px;color:var(--dim)">—</div>'}</div>
+          <div><div class="col-hdr"><div class="col-dot" style="background:var(--wife)"></div><div class="col-name" style="color:var(--wife)">Yumi</div></div>${we.length?we.map(e=>buildMini(e)).join(''):'<div style="font-size:11px;color:var(--dim)">—</div>'}</div>
         </div>
       </div>`;
     }
@@ -502,17 +521,17 @@ function renderSettings(){
   document.getElementById('t30').className='tog '+(prefs.r30?'on':'');
   document.getElementById('tAt').className='tog '+(prefs.rAt?'on':'');
   document.getElementById('profCard').innerHTML=`
-    <div class="si-row"><span class="si-lbl">My role</span><span class="si-val" style="color:var(--${role})">${role==='husband'?'👨 Husband':'👩 Wife'}</span></div>
-    <div class="si-row"><span class="si-lbl">Pair code</span>${code?`<span class="code-copy" onclick="navigator.clipboard?.writeText('${code}').then(()=>showT('Copied!',''))">${code}</span>`:'<span class="si-val" style="color:var(--dim)">Not paired</span>'}</div>`;
-  const ls=lastSync?`Last synced ${lastSync.toLocaleTimeString([],{hour:'2-digit',minute:'2-digit'})}`:'Not yet synced';
+    <div class="si-row"><span class="si-lbl">My Role</span><span class="si-val" style="color:var(--${role})">${role==='husband'?'👨 Omi':'👩 Yumi'}</span></div>
+    <div class="si-row"><span class="si-lbl">ペアコード</span>${code?`<span class="code-copy" onclick="navigator.clipboard?.writeText('${code}').then(()=>showT('コピー完了！',''))">${code}</span>`:'<span class="si-val" style="color:var(--dim)">ペアリングなし</span>'}</div>`;
+  const ls=lastSync?`最後に同期: ${lastSync.toLocaleTimeString('ja-JP',{hour:'2-digit',minute:'2-digit'})}`:'まだ同期されていません';
   document.getElementById('syncCard').innerHTML=`
-    <div class="si-row"><span class="si-lbl">Status</span><span class="si-val" style="color:${code?'var(--green)':'var(--dim)'}">${code?'Paired ✓':'Not paired'}</span></div>
-    <div class="si-row"><span class="si-lbl">${ls}</span><button onclick="doSync()" style="background:var(--s3);border:1px solid var(--border2);color:var(--muted);padding:5px 11px;border-radius:var(--rx);font-size:12px;font-weight:600;cursor:pointer">Sync Now</button></div>
-    <div class="si-row" style="display:block;padding-top:8px"><span class="si-lbl" style="font-size:11px;line-height:1.6;display:block">Share the pair code with your spouse. The app syncs automatically every 60 seconds. Both spouses can see all shared events; you can only edit your own.</span></div>`;
+    <div class="si-row"><span class="si-lbl">ステータス</span><span class="si-val" style="color:${code?'var(--green)':'var(--dim)'}">${code?'ペアリング ✓':'ペアリングなし'}</span></div>
+    <div class="si-row"><span class="si-lbl">${ls}</span><button onclick="doSync()" style="background:var(--s3);border:1px solid var(--border2);color:var(--muted);padding:5px 11px;border-radius:var(--rx);font-size:12px;font-weight:600;cursor:pointer">今すぐ同期</button></div>
+    <div class="si-row" style="display:block;padding-top:8px"><span class="si-lbl" style="font-size:11px;line-height:1.6;display:block">パートナーとペアコードを共有してください。アプリは60秒ごとに自動同期されます。両者がすべての共有イベントを確認でき、自分のイベントのみ編集可能です。</span></div>`;
   const nb=document.getElementById('notifBar');
   if(!('Notification' in window))nb.innerHTML='';
-  else if(Notification.permission==='granted')nb.innerHTML=`<div style="background:rgba(107,232,167,.07);border:1px solid rgba(107,232,167,.2);border-radius:var(--rs);padding:9px 12px;margin-bottom:11px;font-size:13px;color:var(--green)">✓ Notifications enabled</div>`;
-  else nb.innerHTML=`<div style="background:rgba(240,120,120,.07);border:1px solid rgba(240,120,120,.2);border-radius:var(--rs);padding:9px 12px;margin-bottom:11px;font-size:13px;color:var(--red);cursor:pointer" onclick="reqNotif()">🔔 Tap to enable notifications</div>`;
+  else if(Notification.permission==='granted')nb.innerHTML=`<div style="background:rgba(107,232,167,.07);border:1px solid rgba(107,232,167,.2);border-radius:var(--rs);padding:9px 12px;margin-bottom:11px;font-size:13px;color:var(--green)">✓ 通知が有効です</div>`;
+  else nb.innerHTML=`<div style="background:rgba(240,120,120,.07);border:1px solid rgba(240,120,120,.2);border-radius:var(--rs);padding:9px 12px;margin-bottom:11px;font-size:13px;color:var(--red);cursor:pointer" onclick="reqNotif()">🔔 タップして通知を有効にする</div>`;
 }
 function tp(k){prefs[k]=!prefs[k];sv();renderSettings();}
 
@@ -529,8 +548,8 @@ function openM(id){
     document.getElementById('ec').value=e.cat||'general';
     document.getElementById('edu').value=e.duration||60;
     selW=e.who||role;
-    document.getElementById('mtitle').textContent='Edit Event';
-    document.getElementById('msub').textContent='Save Changes';
+    document.getElementById('mtitle').textContent='イベント編集';
+    document.getElementById('msub').textContent='変更を保存';
   } else {
     document.getElementById('et').value='';
     document.getElementById('en').value='';
@@ -539,8 +558,8 @@ function openM(id){
     document.getElementById('ec').value='general';
     document.getElementById('edu').value=60;
     selW=role||'husband';
-    document.getElementById('mtitle').textContent='Add Event';
-    document.getElementById('msub').textContent='Add to Schedule';
+    document.getElementById('mtitle').textContent='イベント追加';
+    document.getElementById('msub').textContent='スケジュールに追加';
   }
   updWP();
   document.getElementById('mbg').classList.add('open');
@@ -558,18 +577,18 @@ function saveEv(){
   if(!title){document.getElementById('et').focus();return;}
   if(!date||!time)return;
   const e={id:editId||gid(),title,note:document.getElementById('en').value.trim(),date,time,cat:document.getElementById('ec').value,duration:parseInt(document.getElementById('edu').value)||60,who:selW,owner:role,updatedAt:Date.now()};
-  if(editId){const i=evs.findIndex(x=>x.id===editId);evs[i]=e;showT('Updated',e.title);}
-  else{evs.push(e);showT('Added!',`${e.title} — ${fmtD(date)}`);}
+  if(editId){const i=evs.findIndex(x=>x.id===editId);evs[i]=e;showT('更新されました',e.title);}
+  else{evs.push(e);showT('追加されました！',`${e.title} — ${fmtD(date)}`);}
   sv();closeM();doSyncFull(false);
   const at=document.querySelector('.tab.active').textContent.toLowerCase();
-  if(at.includes('today'))renderToday();
-  if(at.includes('upcoming'))renderUpcoming();
+  if(at.includes('today')||at.includes('今日'))renderToday();
+  if(at.includes('upcoming')||at.includes('今後'))renderUpcoming();
 }
-function editE(id){const e=evs.find(x=>x.id===id);if(!e||!canEdit(e)){showT('Cannot edit','You can only edit your own events.');return;}openM(id);}
-function delE(id){const e=evs.find(x=>x.id===id);if(!e||!canEdit(e)){showT('Cannot delete','You can only delete your own events.');return;}if(!confirm(`Delete "${e.title}"?`))return;evs=evs.filter(x=>x.id!==id);sv();doSyncFull(false);renderToday();renderUpcoming();}
-function clearPast(){if(!confirm('Remove past events?'))return;const t=todayS();evs=evs.filter(e=>e.date>=t);sv();doSyncFull(false);renderToday();}
-function clearAll(){if(!confirm('Delete ALL events?'))return;evs=[];sv();doSyncFull(false);renderToday();}
-function resetApp(){if(!confirm('Reset and re-pair?'))return;[RK,SYK].forEach(k=>localStorage.removeItem(k));location.reload();}
+function editE(id){const e=evs.find(x=>x.id===id);if(!e||!canEdit(e)){showT('編集できません','自分のイベントのみ編集可能です。');return;}openM(id);}
+function delE(id){const e=evs.find(x=>x.id===id);if(!e||!canEdit(e)){showT('削除できません','自分のイベントのみ削除可能です。');return;}if(!confirm(`"${e.title}"を削除しますか？`))return;evs=evs.filter(x=>x.id!==id);sv();doSyncFull(false);renderToday();renderUpcoming();}
+function clearPast(){if(!confirm('過去のイベントを削除しますか？'))return;const t=todayS();evs=evs.filter(e=>e.date>=t);sv();doSyncFull(false);renderToday();}
+function clearAll(){if(!confirm('すべてのイベントを削除しますか？'))return;evs=[];sv();doSyncFull(false);renderToday();}
+function resetApp(){if(!confirm('リセット＆再ペアリングしますか？'))return;[RK,SYK].forEach(k=>localStorage.removeItem(k));location.reload();}
 
 // SYNC
 function setSP(st,txt){
@@ -581,7 +600,7 @@ function setSP(st,txt){
 
 async function doSyncFull(announce){
   if(!code||syncing)return;
-  syncing=true;setSP('go','Syncing…');
+  syncing=true;setSP('go','同期中…');
   try{
     const prompt=`You are a simple JSON data relay for a family schedule sync system.
 Pair code: "${code}"
@@ -602,17 +621,17 @@ Rules:
     const parsed=JSON.parse(txt);
     if(parsed.merged&&Array.isArray(parsed.merged)){
       evs=merge(evs,parsed.merged);sv();
-      lastSync=new Date();setSP('ok','Synced ✓');
+      lastSync=new Date();setSP('ok','同期完了 ✓');
       if(announce){
-        if(parsed.partnerCount>0) showT('Synced!',`Got ${parsed.partnerCount} event(s) from your spouse ♥`);
-        else showT('Connected!','Waiting for your spouse to sync their schedule.');
+        if(parsed.partnerCount>0) showT('同期されました！',`パートナーから${parsed.partnerCount}件のイベントを取得しました ♥`);
+        else showT('接続されました','パートナーの同期を待機中です。');
       }
       const at=document.querySelector('.tab.active')?.textContent.toLowerCase()||'today';
-      if(at.includes('today'))renderToday();
-      if(at.includes('upcoming'))renderUpcoming();
-      if(at.includes('settings'))renderSettings();
+      if(at.includes('today')||at.includes('今日'))renderToday();
+      if(at.includes('upcoming')||at.includes('今後'))renderUpcoming();
+      if(at.includes('settings')||at.includes('設定'))renderSettings();
     }
-  }catch(err){console.warn('sync:',err);setSP('','Sync');if(announce)showT('Sync issue','Saved locally. Check connection.');}
+  }catch(err){console.warn('sync:',err);setSP('','同期');if(announce)showT('同期の問題','ローカルに保存されています。接続を確認してください。');}
   syncing=false;
 }
 
@@ -627,7 +646,7 @@ function doSync(){syncing=false;doSyncFull(true);}
 // NOTIF
 async function reqNotif(){
   if(!('Notification' in window))return;
-  if(Notification.permission==='default'){setTimeout(async()=>{const r=await Notification.requestPermission();if(r==='granted')showT('Notifications on','You\'ll get reminders before events.');},1500);}
+  if(Notification.permission==='default'){setTimeout(async()=>{const r=await Notification.requestPermission();if(r==='granted')showT('通知が有効','イベント前にリマインダーを受け取ります。');},1500);}
 }
 function checkNotifs(){
   if(!('Notification' in window)||Notification.permission!=='granted')return;
@@ -635,8 +654,8 @@ function checkNotifs(){
   evs.forEach(e=>{
     if(e.who!=='both'&&e.who!==role)return;
     const s=new Date(e.date+'T'+e.time),ms=s-now;
-    if(prefs.r30&&ms>0&&ms<=31*60*1000&&ms>29*60*1000){const k=e.id+'_30';if(!notM[k]){notM[k]=true;sessionStorage.setItem(NK,JSON.stringify(notM));try{new Notification('⏰ In 30 minutes',{body:e.title});}catch(_){}showT('⏰ Reminder',`${e.title} starts in 30 min`);}}
-    if(prefs.rAt&&ms>=-60*1000&&ms<=60*1000){const k=e.id+'_at';if(!notM[k]){notM[k]=true;sessionStorage.setItem(NK,JSON.stringify(notM));try{new Notification('🔔 Starting now!',{body:e.title});}catch(_){}showT('🔔 Now!',`${e.title} is starting!`);}}
+    if(prefs.r30&&ms>0&&ms<=31*60*1000&&ms>29*60*1000){const k=e.id+'_30';if(!notM[k]){notM[k]=true;sessionStorage.setItem(NK,JSON.stringify(notM));try{new Notification('⏰ 30分後',{body:e.title});}catch(_){}showT('⏰ リマインダー',`${e.title}は30分後に開始します`);}}
+    if(prefs.rAt&&ms>=-60*1000&&ms<=60*1000){const k=e.id+'_at';if(!notM[k]){notM[k]=true;sessionStorage.setItem(NK,JSON.stringify(notM));try{new Notification('🔔 今から開始！',{body:e.title});}catch(_){}showT('🔔 開始！',`${e.title}が開始されます！`);}}
   });
 }
 
@@ -646,10 +665,29 @@ function showT(title,body){
   d.className='toast';d.innerHTML=`<div class="toast-t">${esc(title)}</div><div class="toast-b">${esc(body)}</div>`;
   w.appendChild(d);setTimeout(()=>d.remove(),4500);
 }
+function setTheme(t){
+  document.documentElement.setAttribute('data-theme',t==='pastel'?'':t);
+  localStorage.setItem('theme',t);
+  document.querySelectorAll('.theme-btn').forEach(b=>b.classList.remove('active'));
+  document.querySelector(`[data-theme="${t}"]`)?.classList.add('active');
+}
+function loadTheme(){
+  const t=localStorage.getItem('theme')||'pastel';
+  document.documentElement.setAttribute('data-theme',t==='pastel'?'':t);
+}
 
-// INIT
-ld();
+// THEME
+function setTheme(t){
+  document.documentElement.setAttribute('data-theme',t==='pastel'?'':t);
+  localStorage.setItem('theme',t);
+  if(document.querySelector('.tab.active')?.textContent.toLowerCase().includes('设置')||document.querySelector('.tab.active')?.textContent.toLowerCase().includes('設定'))renderSettings();
+}
+function loadTheme(){
+  const t=localStorage.getItem('theme')||'pastel';
+  document.documentElement.setAttribute('data-theme',t==='pastel'?'':t);
+}
 if(role){launchApp();if(code)setTimeout(()=>doSyncFull(false),800);}
+loadTheme();
 </script>
 </body>
 </html>
