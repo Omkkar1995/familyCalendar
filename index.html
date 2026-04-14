@@ -890,7 +890,8 @@ async function saveEv(){
   const date=document.getElementById('ed').value;
   const time=document.getElementById('eti').value;
   if(!title){document.getElementById('et').focus();return;}
-  if(!date||!time)return;
+  if(!date)return;
+  if(!allDay&&!time)return;
 
   const sub=document.getElementById('msub');
   sub.classList.add('loading');
