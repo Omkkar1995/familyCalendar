@@ -1,0 +1,655 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<meta name="theme-color" content="#0d0c18">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<title>Our Schedule</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;1,400&family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#0d0c18;--s1:#16152a;--s2:#1e1d33;--s3:#262540;--s4:#2e2c4d;--border:rgba(255,255,255,0.07);--border2:rgba(255,255,255,0.13);--text:#f0eeff;--muted:rgba(240,238,255,0.55);--dim:rgba(240,238,255,0.3);--husband:#7eb8f7;--hbg:rgba(126,184,247,0.12);--hbd:rgba(126,184,247,0.25);--wife:#f78eb8;--wbg:rgba(247,142,184,0.12);--wbd:rgba(247,142,184,0.25);--both:#c4a7f7;--bbg:rgba(196,167,247,0.12);--bbd:rgba(196,167,247,0.25);--gold:#f0c96a;--green:#6be8a7;--red:#f07878;--r:14px;--rs:10px;--rx:7px;--ff:'Outfit',sans-serif;--fd:'Playfair Display',serif}
+*{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
+body{background:var(--bg);color:var(--text);font-family:var(--ff);font-size:15px;min-height:100vh;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+
+.onboard{position:fixed;inset:0;background:var(--bg);z-index:9999;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:28px 22px;gap:18px;overflow-y:auto}
+.ob-logo{font-family:var(--fd);font-size:34px;color:var(--text);text-align:center;line-height:1.2}
+.ob-logo em{color:var(--gold);font-style:italic}
+.ob-sub{font-size:14px;color:var(--muted);text-align:center;max-width:280px;line-height:1.6}
+.role-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;width:100%;max-width:330px}
+.role-card{background:var(--s2);border:1.5px solid var(--border2);border-radius:var(--r);padding:22px 14px;text-align:center;cursor:pointer;transition:all .2s}
+.role-card.rh:hover,.role-card.rh.sel{border-color:var(--husband);background:var(--hbg)}
+.role-card.rw:hover,.role-card.rw.sel{border-color:var(--wife);background:var(--wbg)}
+.role-icon{font-size:30px;margin-bottom:7px}
+.role-name{font-size:15px;font-weight:600}
+.role-desc{font-size:11px;color:var(--muted);margin-top:3px}
+.ob-btn{width:100%;max-width:330px;padding:14px;background:var(--gold);color:#140f00;border:none;border-radius:var(--rs);font-family:var(--ff);font-size:15px;font-weight:700;cursor:pointer;transition:all .2s;opacity:.35;pointer-events:none}
+.ob-btn.ready{opacity:1;pointer-events:all}
+.ob-btn.ready:active{transform:scale(.97)}
+.sync-sec{width:100%;max-width:330px}
+.slbl{font-size:11px;color:var(--dim);text-transform:uppercase;letter-spacing:1px;font-weight:700;margin-bottom:8px;display:block}
+.sync-inp{width:100%;background:var(--s2);border:1px solid var(--border2);border-radius:var(--rs);color:var(--text);font-family:monospace;font-size:18px;padding:12px;outline:none;text-align:center;letter-spacing:3px}
+.sync-inp:focus{border-color:var(--gold)}
+.code-display{background:var(--s2);border:1px solid var(--border2);border-radius:var(--rs);padding:16px;text-align:center;cursor:pointer;transition:all .2s}
+.code-display:hover{border-color:var(--gold)}
+.code-val{font-size:26px;font-weight:700;letter-spacing:4px;color:var(--gold);font-family:monospace;margin-bottom:6px}
+.code-hint{font-size:11px;color:var(--muted);line-height:1.5}
+.ob-link{font-size:13px;color:var(--dim);cursor:pointer;text-decoration:underline;text-underline-offset:3px;text-align:center}
+
+.header{background:var(--s1);border-bottom:1px solid var(--border);padding:0 15px;position:sticky;top:0;z-index:100;height:58px;display:flex;align-items:center;justify-content:space-between}
+.logo{font-family:var(--fd);font-size:19px}
+.logo em{font-style:italic;color:var(--gold)}
+.hdr-right{display:flex;align-items:center;gap:9px}
+.sync-pill{display:flex;align-items:center;gap:5px;font-size:11px;padding:5px 9px;border-radius:20px;border:1px solid var(--border2);cursor:pointer;background:var(--s2);color:var(--muted);transition:all .2s;white-space:nowrap}
+.sync-pill.ok{border-color:rgba(107,232,167,.3);color:var(--green)}
+.sync-pill.go{border-color:rgba(240,201,106,.3);color:var(--gold)}
+.sdot{width:6px;height:6px;border-radius:50%;background:currentColor;flex-shrink:0}
+@keyframes blink{0%,100%{opacity:1}50%{opacity:.25}}
+.sync-pill.go .sdot{animation:blink 1s infinite}
+.avatar{width:32px;height:32px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:14px;flex-shrink:0}
+.av-h{background:var(--hbg);border:1.5px solid var(--husband)}
+.av-w{background:var(--wbg);border:1.5px solid var(--wife)}
+
+.tabs{background:var(--s1);border-bottom:1px solid var(--border);display:flex;padding:0 15px;gap:3px}
+.tab{flex:1;padding:10px 5px;background:none;border:none;color:var(--dim);font-family:var(--ff);font-size:13px;font-weight:500;cursor:pointer;border-bottom:2px solid transparent;transition:all .2s;text-align:center}
+.tab.active{color:var(--gold);border-bottom-color:var(--gold)}
+
+.main{max-width:600px;margin:0 auto;padding:15px 13px 100px}
+
+.vtog{display:flex;background:var(--s2);border:1px solid var(--border);border-radius:var(--rs);padding:3px;gap:2px;margin-bottom:14px}
+.vt{flex:1;padding:8px;background:none;border:none;border-radius:8px;color:var(--muted);font-family:var(--ff);font-size:12px;font-weight:600;cursor:pointer;transition:all .2s;text-align:center}
+.vt.active{background:var(--s4);color:var(--text)}
+
+.hero{background:var(--s2);border:1px solid var(--border2);border-radius:var(--r);padding:17px;margin-bottom:14px;position:relative;overflow:hidden}
+.hero::after{content:'';position:absolute;top:-40px;right:-40px;width:120px;height:120px;background:radial-gradient(circle,rgba(196,167,247,.1) 0%,transparent 70%);border-radius:50%;pointer-events:none}
+.hero-lbl{font-size:10px;text-transform:uppercase;letter-spacing:1.5px;color:var(--gold);font-weight:700;margin-bottom:2px}
+.hero-title{font-family:var(--fd);font-size:23px;line-height:1.2}
+.hero-sub{font-size:12px;color:var(--muted);margin-top:3px}
+.next-up{margin-top:11px;background:rgba(196,167,247,.07);border:1px solid rgba(196,167,247,.2);border-radius:var(--rx);padding:9px 12px;display:flex;align-items:center;gap:9px}
+.nu-dot{width:7px;height:7px;background:var(--both);border-radius:50%;flex-shrink:0;animation:pulse 2s infinite}
+@keyframes pulse{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.35;transform:scale(.7)}}
+.nu-lbl{font-size:10px;color:var(--both);font-weight:700;display:block;text-transform:uppercase;letter-spacing:.5px}
+.nu-txt{font-size:13px;font-weight:500}
+
+.split{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.col-hdr{display:flex;align-items:center;gap:6px;margin-bottom:9px;padding-bottom:7px;border-bottom:1px solid var(--border)}
+.col-dot{width:7px;height:7px;border-radius:50%;flex-shrink:0}
+.col-name{font-size:12px;font-weight:700}
+.mini{background:var(--s2);border:1px solid var(--border);border-radius:var(--rx);padding:9px;margin-bottom:6px;transition:all .15s}
+.mini.past{opacity:.35}
+.mini.active-now{border-color:rgba(107,232,167,.3)}
+.mini-time{font-size:10px;font-weight:700;color:var(--muted);margin-bottom:2px}
+.mini-title{font-size:12px;font-weight:600;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.mini-cat{font-size:10px;color:var(--dim);margin-top:1px}
+
+.slbl2{font-size:10px;text-transform:uppercase;letter-spacing:1.5px;color:var(--dim);font-weight:700;margin-bottom:9px;padding-left:2px}
+.evlist{display:flex;flex-direction:column;gap:8px;margin-bottom:22px}
+.evc{background:var(--s2);border:1px solid var(--border);border-radius:var(--r);padding:13px;display:flex;align-items:flex-start;gap:11px;position:relative;overflow:hidden;transition:all .2s}
+.evc:hover{background:var(--s3);border-color:var(--border2)}
+.evc.past{opacity:.38}
+.evc.active-now{border-color:rgba(107,232,167,.3);background:rgba(107,232,167,.03)}
+.evc::before{content:'';position:absolute;left:0;top:0;bottom:0;width:3px;border-radius:2px 0 0 2px}
+.evc.ev-h::before{background:var(--husband)}
+.evc.ev-w::before{background:var(--wife)}
+.evc.ev-b::before{background:var(--both)}
+.evc.active-now::before{background:var(--green)!important}
+.ev-t{text-align:right;min-width:42px;flex-shrink:0}
+.ev-tv{font-size:13px;font-weight:700}
+.ev-tp{font-size:10px;color:var(--dim);font-weight:700;text-transform:uppercase}
+.ev-sep{width:1px;background:var(--border);align-self:stretch;flex-shrink:0;margin:1px 0}
+.ev-b{flex:1;min-width:0}
+.ev-tit{font-size:14px;font-weight:600;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;margin-bottom:2px}
+.ev-note{font-size:12px;color:var(--muted);margin-bottom:5px;line-height:1.4}
+.tags{display:flex;flex-wrap:wrap;gap:4px}
+.tag{font-size:10px;padding:2px 7px;border-radius:20px;font-weight:700;letter-spacing:.2px}
+.th{background:var(--hbg);color:var(--husband);border:1px solid var(--hbd)}
+.tw{background:var(--wbg);color:var(--wife);border:1px solid var(--wbd)}
+.tb{background:var(--bbg);color:var(--both);border:1px solid var(--bbd)}
+.tc{background:rgba(255,255,255,.05);color:var(--dim)}
+.ev-acts{display:flex;flex-direction:column;gap:5px;flex-shrink:0}
+.ico{width:28px;height:28px;background:rgba(255,255,255,.05);border:1px solid var(--border);border-radius:var(--rx);display:flex;align-items:center;justify-content:center;cursor:pointer;font-size:12px;transition:all .15s;color:var(--muted)}
+.ico:hover{background:rgba(255,255,255,.1);color:var(--text)}
+.ico.del:hover{background:rgba(240,120,120,.12);border-color:rgba(240,120,120,.3);color:var(--red)}
+.ico.off{opacity:.2;pointer-events:none}
+
+.empty{text-align:center;padding:32px 14px;color:var(--dim)}
+.empty-ico{font-size:30px;opacity:.35;margin-bottom:9px}
+.empty-txt{font-size:13px;line-height:1.6}
+
+.fab{position:fixed;bottom:22px;right:16px;width:54px;height:54px;background:var(--gold);color:#140f00;border:none;border-radius:50%;font-size:26px;cursor:pointer;box-shadow:0 4px 20px rgba(240,201,106,.4);display:flex;align-items:center;justify-content:center;z-index:200;transition:all .2s}
+.fab:hover{transform:scale(1.07)}
+.fab:active{transform:scale(.92)}
+
+.mbg{position:fixed;inset:0;background:rgba(0,0,0,.77);z-index:500;display:flex;align-items:flex-end;opacity:0;pointer-events:none;transition:opacity .22s}
+.mbg.open{opacity:1;pointer-events:all}
+.modal{background:var(--s1);border:1px solid var(--border2);border-radius:var(--r) var(--r) 0 0;padding:19px 17px 42px;width:100%;max-width:600px;margin:0 auto;transform:translateY(100%);transition:transform .3s cubic-bezier(.32,.72,0,1);max-height:92vh;overflow-y:auto}
+.mbg.open .modal{transform:translateY(0)}
+@media(min-width:600px){.modal{border-radius:var(--r);margin-bottom:36px}.mbg{align-items:center}}
+.mhandle{width:34px;height:4px;background:var(--border2);border-radius:2px;margin:-3px auto 16px}
+.mtitle{font-family:var(--fd);font-size:20px;margin-bottom:16px}
+.fg{margin-bottom:13px}
+.fl{font-size:11px;color:var(--muted);font-weight:700;text-transform:uppercase;letter-spacing:.8px;margin-bottom:5px;display:block}
+.fi,.fsel,.fta{width:100%;background:var(--s2);border:1px solid var(--border2);border-radius:var(--rs);color:var(--text);font-family:var(--ff);font-size:15px;padding:10px 12px;outline:none;transition:border-color .2s;-webkit-appearance:none;appearance:none}
+.fi:focus,.fsel:focus,.fta:focus{border-color:var(--gold)}
+.fta{resize:vertical;min-height:62px;line-height:1.5}
+.frow{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.who-g{display:grid;grid-template-columns:repeat(3,1fr);gap:7px}
+.wp{padding:9px 5px;background:var(--s2);border:1.5px solid var(--border2);border-radius:var(--rs);color:var(--muted);font-size:12px;font-weight:700;cursor:pointer;text-align:center;transition:all .2s;line-height:1.35}
+.wp.sh{background:var(--hbg);border-color:var(--husband);color:var(--husband)}
+.wp.sw{background:var(--wbg);border-color:var(--wife);color:var(--wife)}
+.wp.sb{background:var(--bbg);border-color:var(--both);color:var(--both)}
+.bsub{width:100%;padding:13px;background:var(--gold);color:#140f00;border:none;border-radius:var(--rs);font-family:var(--ff);font-size:15px;font-weight:700;cursor:pointer;margin-top:5px;transition:all .2s}
+.bsub:active{transform:scale(.97)}
+
+.tw-wrap{position:fixed;top:70px;left:50%;transform:translateX(-50%);width:calc(100% - 26px);max-width:370px;z-index:999;display:flex;flex-direction:column;gap:6px;pointer-events:none}
+.toast{background:var(--s3);border:1px solid var(--border2);border-radius:var(--rs);padding:11px 13px;animation:tIn .28s cubic-bezier(.32,.72,0,1) forwards;box-shadow:0 8px 26px rgba(0,0,0,.5);pointer-events:all}
+@keyframes tIn{from{opacity:0;transform:translateY(-7px) scale(.96)}to{opacity:1;transform:none}}
+.toast-t{font-size:13px;font-weight:700;color:var(--gold);margin-bottom:2px}
+.toast-b{font-size:12px;color:var(--muted)}
+
+.up-day{margin-bottom:20px}
+.up-hdr{display:flex;align-items:center;gap:9px;margin-bottom:9px}
+.up-name{font-family:var(--fd);font-size:16px}
+.up-badge{padding:2px 8px;background:rgba(240,201,106,.1);color:var(--gold);border-radius:20px;font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.5px;border:1px solid rgba(240,201,106,.2)}
+
+.sc{background:var(--s2);border:1px solid var(--border);border-radius:var(--r);padding:13px;margin-bottom:12px}
+.shdr{font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.5px;margin-bottom:9px;color:var(--text)}
+.tr{display:flex;align-items:center;justify-content:space-between;padding:7px 0;border-top:1px solid var(--border)}
+.trl{font-size:14px;color:var(--muted)}
+.tog{width:40px;height:23px;background:var(--s3);border:1px solid var(--border2);border-radius:12px;position:relative;cursor:pointer;transition:background .2s;flex-shrink:0}
+.tog.on{background:var(--gold);border-color:var(--gold)}
+.tog::after{content:'';position:absolute;left:3px;top:3px;width:15px;height:15px;background:#fff;border-radius:50%;transition:transform .2s;box-shadow:0 1px 3px rgba(0,0,0,.3)}
+.tog.on::after{transform:translateX(17px)}
+.dbtn{background:rgba(240,120,120,.09);border:1px solid rgba(240,120,120,.22);color:var(--red);padding:5px 11px;border-radius:var(--rx);font-size:12px;font-weight:700;cursor:pointer}
+.si{background:var(--s2);border:1px solid var(--border);border-radius:var(--r);padding:13px;margin-bottom:12px}
+.si-row{display:flex;align-items:center;justify-content:space-between;padding:5px 0}
+.si-lbl{font-size:12px;color:var(--dim)}
+.si-val{font-size:13px;font-weight:600}
+.code-copy{background:var(--s3);border:1px solid var(--border2);border-radius:var(--rx);padding:4px 10px;font-size:12px;font-weight:700;letter-spacing:2px;color:var(--gold);cursor:pointer;font-family:monospace}
+
+@media(max-width:370px){.frow{grid-template-columns:1fr}.split{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+
+<!-- ONBOARDING -->
+<div class="onboard" id="onboard">
+  <div class="ob-logo">Our <em>Schedule</em><br><span style="font-size:16px;color:var(--muted);font-family:var(--ff);font-weight:300">for two ♥</span></div>
+  <div class="ob-sub">A shared family schedule — see each other's plans and get reminders together.</div>
+  <div class="role-grid">
+    <div class="role-card rh" onclick="selectRole('husband')">
+      <div class="role-icon">👨</div>
+      <div class="role-name" style="color:var(--husband)">Husband</div>
+      <div class="role-desc">Blue events</div>
+    </div>
+    <div class="role-card rw" onclick="selectRole('wife')">
+      <div class="role-icon">👩</div>
+      <div class="role-name" style="color:var(--wife)">Wife</div>
+      <div class="role-desc">Pink events</div>
+    </div>
+  </div>
+  <div class="sync-sec" id="syncSec" style="display:none">
+    <div id="syncContent"></div>
+  </div>
+  <button class="ob-btn" id="obBtn" onclick="finishOnboard()">Get Started</button>
+  <span class="ob-link" id="obSkip" style="display:none" onclick="skipPairing()">Skip pairing for now</span>
+</div>
+
+<div class="tw-wrap" id="twWrap"></div>
+
+<header class="header" id="hdr" style="display:none">
+  <div class="logo">Our <em>Schedule</em></div>
+  <div class="hdr-right">
+    <div class="sync-pill" id="spill" onclick="doSync()"><div class="sdot"></div><span id="spillTxt">Sync</span></div>
+    <div class="avatar" id="myAv"></div>
+  </div>
+</header>
+
+<div class="tabs" id="tabs" style="display:none">
+  <button class="tab active" onclick="sw('today',this)">Today</button>
+  <button class="tab" onclick="sw('upcoming',this)">Upcoming</button>
+  <button class="tab" onclick="sw('settings',this)">Settings</button>
+</div>
+
+<div class="main" id="mainArea" style="display:none">
+  <div id="tab-today">
+    <div class="hero">
+      <div class="hero-lbl">Today</div>
+      <div class="hero-title" id="heroTitle"></div>
+      <div class="hero-sub" id="heroSub"></div>
+      <div class="next-up" id="nextUp" style="display:none">
+        <div class="nu-dot"></div>
+        <div><span class="nu-lbl">Next up</span><span class="nu-txt" id="nuTxt"></span></div>
+      </div>
+    </div>
+    <div class="vtog">
+      <button class="vt active" id="vt1" onclick="setV('c')">📋 Combined</button>
+      <button class="vt" id="vt2" onclick="setV('s')">👨👩 Side by Side</button>
+    </div>
+    <div id="tComb"></div>
+    <div id="tSplit" style="display:none"></div>
+  </div>
+  <div id="tab-upcoming" style="display:none">
+    <div class="vtog">
+      <button class="vt active" id="uv1" onclick="setUV('c')">📋 Combined</button>
+      <button class="vt" id="uv2" onclick="setUV('s')">👨👩 Side by Side</button>
+    </div>
+    <div id="uContent"></div>
+  </div>
+  <div id="tab-settings" style="display:none">
+    <div class="slbl2">My Profile</div>
+    <div class="si" id="profCard"></div>
+    <div class="slbl2">Sync</div>
+    <div class="si" id="syncCard"></div>
+    <div class="slbl2">Notifications</div>
+    <div id="notifBar"></div>
+    <div class="sc">
+      <div class="shdr">Reminders</div>
+      <div class="tr" style="border-top:none;padding-top:0">
+        <span class="trl">30 min before</span>
+        <div class="tog on" id="t30" onclick="tp('r30')"></div>
+      </div>
+      <div class="tr">
+        <span class="trl">At event time</span>
+        <div class="tog on" id="tAt" onclick="tp('rAt')"></div>
+      </div>
+    </div>
+    <div class="slbl2">Data</div>
+    <div class="sc">
+      <div class="tr" style="border-top:none;padding-top:0"><span class="trl">Clear past events</span><button class="dbtn" onclick="clearPast()">Clear</button></div>
+      <div class="tr"><span class="trl">Delete all events</span><button class="dbtn" onclick="clearAll()">Delete All</button></div>
+      <div class="tr"><span class="trl">Reset &amp; re-pair</span><button class="dbtn" onclick="resetApp()">Reset</button></div>
+    </div>
+  </div>
+</div>
+
+<button class="fab" id="fab" style="display:none" onclick="openM()">+</button>
+
+<div class="mbg" id="mbg" onclick="bgClick(event)">
+  <div class="modal">
+    <div class="mhandle"></div>
+    <div class="mtitle" id="mtitle">Add Event</div>
+    <div class="fg"><label class="fl">Title</label><input class="fi" id="et" type="text" placeholder="e.g. Doctor appointment" maxlength="60"></div>
+    <div class="fg"><label class="fl">Notes (optional)</label><textarea class="fta" id="en" placeholder="Details…" maxlength="200"></textarea></div>
+    <div class="frow">
+      <div class="fg"><label class="fl">Date</label><input class="fi" id="ed" type="date"></div>
+      <div class="fg"><label class="fl">Time</label><input class="fi" id="eti" type="time"></div>
+    </div>
+    <div class="frow">
+      <div class="fg"><label class="fl">Category</label>
+        <select class="fsel" id="ec">
+          <option value="general">📋 General</option>
+          <option value="medical">🏥 Medical</option>
+          <option value="work">💼 Work</option>
+          <option value="social">🎉 Social</option>
+          <option value="errand">🛒 Errand</option>
+          <option value="family">👨‍👩‍👧 Family</option>
+          <option value="sport">🏃 Sport</option>
+          <option value="travel">✈️ Travel</option>
+        </select>
+      </div>
+      <div class="fg"><label class="fl">Duration (min)</label><input class="fi" id="edu" type="number" min="5" max="480" value="60"></div>
+    </div>
+    <div class="fg">
+      <label class="fl">Who</label>
+      <div class="who-g">
+        <div class="wp sh" data-w="husband" onclick="pw('husband')">👨 Husband</div>
+        <div class="wp" data-w="wife" onclick="pw('wife')">👩 Wife</div>
+        <div class="wp" data-w="both" onclick="pw('both')">💑 Both</div>
+      </div>
+    </div>
+    <button class="bsub" id="msub" onclick="saveEv()">Add to Schedule</button>
+  </div>
+</div>
+
+<script>
+const SK='fs3',PK='fp3',RK='fr3',SYK='fsy3',NK='fn3';
+const EMO={general:'📋',medical:'🏥',work:'💼',social:'🎉',errand:'🛒',family:'👨‍👩‍👧',sport:'🏃',travel:'✈️'};
+
+let evs=[],prefs={r30:true,rAt:true},role=null,code=null,editId=null,selW='husband',tv='c',uv='c',notM={},lastSync=null,syncing=false;
+let obRole=null,obMode='create',genCode='';
+
+function ld(){
+  try{evs=JSON.parse(localStorage.getItem(SK))||[];}catch(e){evs=[];}
+  try{prefs={...prefs,...JSON.parse(localStorage.getItem(PK))};}catch(e){}
+  role=localStorage.getItem(RK)||null;
+  code=localStorage.getItem(SYK)||null;
+  try{notM=JSON.parse(sessionStorage.getItem(NK)||'{}');}catch(e){}
+}
+function sv(){localStorage.setItem(SK,JSON.stringify(evs));localStorage.setItem(PK,JSON.stringify(prefs));}
+function esc(s){return String(s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');}
+function gid(){return Date.now().toString(36)+Math.random().toString(36).slice(2,5);}
+function mkCode(){return Math.random().toString(36).slice(2,8).toUpperCase();}
+
+// ONBOARD
+function selectRole(r){
+  obRole=r;
+  document.querySelectorAll('.role-card').forEach(c=>c.classList.remove('sel'));
+  document.querySelector('.role-card.r'+r[0]).classList.add('sel');
+  document.getElementById('syncSec').style.display='';
+  renderSS();
+  document.getElementById('obBtn').classList.add('ready');
+  document.getElementById('obSkip').style.display='block';
+}
+function renderSS(){
+  const el=document.getElementById('syncContent');
+  if(obMode==='create'){
+    if(!genCode) genCode=mkCode();
+    el.innerHTML=`<span class="slbl">Your pair code — share with your spouse</span>
+    <div class="code-display" onclick="copyCode('${genCode}')">
+      <div class="code-val">${genCode}</div>
+      <div class="code-hint">👆 Tap to copy &bull; Your spouse enters this when they open the app on their phone</div>
+    </div>
+    <div style="text-align:center;margin-top:10px"><span class="ob-link" onclick="swOB('join')">My spouse already created a code →</span></div>`;
+  } else {
+    el.innerHTML=`<span class="slbl">Enter your spouse's pair code</span>
+    <input class="sync-inp" id="obCI" type="text" maxlength="6" placeholder="ABC123" oninput="this.value=this.value.toUpperCase().replace(/[^A-Z0-9]/g,'')">
+    <div style="text-align:center;margin-top:10px"><span class="ob-link" onclick="swOB('create')">← Create a new code instead</span></div>`;
+  }
+}
+function swOB(m){obMode=m;if(m==='create')genCode=mkCode();renderSS();}
+function copyCode(c){navigator.clipboard?.writeText(c).then(()=>showT('Copied!','Share this code with your spouse.'));}
+function skipPairing(){role=obRole;localStorage.setItem(RK,role);launchApp();}
+function finishOnboard(){
+  if(!obRole)return;
+  role=obRole;
+  localStorage.setItem(RK,role);
+  if(obMode==='create'){code=genCode;}
+  else{const v=document.getElementById('obCI')?.value.trim()||'';if(v.length<4){showT('Enter code','Please enter your spouse\'s pair code.');return;}code=v;}
+  if(code) localStorage.setItem(SYK,code);
+  launchApp();
+  if(code) setTimeout(()=>doSyncFull(true),900);
+}
+
+function launchApp(){
+  document.getElementById('onboard').style.display='none';
+  ['hdr','tabs','mainArea','fab'].forEach(id=>document.getElementById(id).style.display='');
+  const av=document.getElementById('myAv');
+  av.className='avatar av-'+(role==='husband'?'h':'w');
+  av.textContent=role==='husband'?'👨':'👩';
+  selW=role||'husband';
+  renderToday();
+  reqNotif();
+  setInterval(()=>{checkNotifs();if(!document.getElementById('tab-today').style.display)renderToday();},30000);
+  if(code) setInterval(()=>doSyncFull(false),60000);
+}
+
+// TABS
+function sw(n,btn){
+  document.querySelectorAll('.tab').forEach(t=>t.classList.remove('active'));
+  btn.classList.add('active');
+  ['today','upcoming','settings'].forEach(t=>document.getElementById('tab-'+t).style.display=t===n?'':'none');
+  if(n==='today')renderToday();
+  if(n==='upcoming')renderUpcoming();
+  if(n==='settings')renderSettings();
+}
+
+// VIEW
+function setV(v){tv=v;document.getElementById('vt1').classList.toggle('active',v==='c');document.getElementById('vt2').classList.toggle('active',v==='s');renderToday();}
+function setUV(v){uv=v;document.getElementById('uv1').classList.toggle('active',v==='c');document.getElementById('uv2').classList.toggle('active',v==='s');renderUpcoming();}
+
+// HELPERS
+function todayS(){const n=new Date();return`${n.getFullYear()}-${String(n.getMonth()+1).padStart(2,'0')}-${String(n.getDate()).padStart(2,'0')}`;}
+function isToday(d){return d===todayS();}
+function isFut(d){return d>todayS();}
+function isPast(e){const n=new Date(),end=new Date(e.date+'T'+e.time);end.setMinutes(end.getMinutes()+(e.duration||60));return end<n;}
+function isNow(e){const n=new Date(),s=new Date(e.date+'T'+e.time),en=new Date(e.date+'T'+e.time);en.setMinutes(en.getMinutes()+(e.duration||60));return n>=s&&n<=en;}
+function fmt12(t){if(!t)return{v:'',p:''};const[h,m]=t.split(':').map(Number);return{v:`${h%12||12}:${String(m).padStart(2,'0')}`,p:h>=12?'PM':'AM'};}
+function fmtD(d){const dt=new Date(d+'T00:00:00');const days=['Sun','Mon','Tue','Wed','Thu','Fri','Sat'],mos=['January','February','March','April','May','June','July','August','September','October','November','December'];return`${days[dt.getDay()]}, ${mos[dt.getMonth()]} ${dt.getDate()}`;}
+function dDiff(d){return Math.round((new Date(d+'T00:00:00')-new Date(todayS()+'T00:00:00'))/86400000);}
+function canEdit(e){return e.owner===role;}
+function evCls(e){
+  const p=isToday(e.date)&&isPast(e),a=isToday(e.date)&&isNow(e);
+  const oc=e.who==='husband'?'ev-h':e.who==='wife'?'ev-w':'ev-b';
+  return`evc ${oc}${p?' past':''}${a?' active-now':''}`;
+}
+
+function buildCard(e){
+  const t=fmt12(e.time);
+  const wl=e.who==='husband'?'👨 Husband':e.who==='wife'?'👩 Wife':'💑 Both';
+  const tc=e.who==='husband'?'th':e.who==='wife'?'tw':'tb';
+  const ok=canEdit(e);
+  return`<div class="${evCls(e)}" data-id="${e.id}">
+    <div class="ev-t"><div class="ev-tv">${t.v}</div><div class="ev-tp">${t.p}</div></div>
+    <div class="ev-sep"></div>
+    <div class="ev-b">
+      <div class="ev-tit">${esc(e.title)}</div>
+      ${e.note?`<div class="ev-note">${esc(e.note)}</div>`:''}
+      <div class="tags">
+        <span class="tag ${tc}">${wl}</span>
+        <span class="tag tc">${EMO[e.cat]||'📋'} ${e.cat||'general'}</span>
+        ${e.duration?`<span class="tag tc">⏱ ${e.duration}m</span>`:''}
+      </div>
+    </div>
+    <div class="ev-acts">
+      <div class="ico${ok?'':' off'}" onclick="${ok?`editE('${e.id}')`:''}" title="${ok?'Edit':'Owner only'}">✏️</div>
+      <div class="ico del${ok?'':' off'}" onclick="${ok?`delE('${e.id}')`:''}" title="${ok?'Delete':'Owner only'}">🗑</div>
+    </div>
+  </div>`;
+}
+
+function buildMini(e){
+  const t=fmt12(e.time);
+  const p=isToday(e.date)&&isPast(e),a=isToday(e.date)&&isNow(e);
+  return`<div class="mini${p?' past':''}${a?' active-now':''}">
+    <div class="mini-time">${t.v} ${t.p}</div>
+    <div class="mini-title">${esc(e.title)}</div>
+    <div class="mini-cat">${EMO[e.cat]||'📋'} ${e.duration||60}min</div>
+  </div>`;
+}
+
+function emptyHtml(txt){return`<div class="empty"><div class="empty-ico">🗓</div><div class="empty-txt">${txt}</div></div>`;}
+
+// RENDER TODAY
+function renderToday(){
+  const n=new Date();
+  const days=['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday'];
+  const mos=['January','February','March','April','May','June','July','August','September','October','November','December'];
+  document.getElementById('heroTitle').textContent=`${days[n.getDay()]}, ${mos[n.getMonth()]} ${n.getDate()}`;
+  const te=evs.filter(e=>isToday(e.date)).sort((a,b)=>a.time.localeCompare(b.time));
+  document.getElementById('heroSub').textContent=te.length===0?'Nothing scheduled today':`${te.length} event${te.length!==1?'s':''} today`;
+  const act=te.find(e=>isNow(e)),nxt=te.find(e=>!isPast(e)&&!isNow(e));
+  const nb=document.getElementById('nextUp');
+  if(act){nb.style.display='flex';document.getElementById('nuTxt').textContent=`Happening now: ${act.title}`;}
+  else if(nxt){nb.style.display='flex';const t=fmt12(nxt.time);document.getElementById('nuTxt').textContent=`${nxt.title} at ${t.v} ${t.p}`;}
+  else nb.style.display='none';
+
+  if(tv==='c'){
+    document.getElementById('tComb').style.display='';
+    document.getElementById('tSplit').style.display='none';
+    document.getElementById('tComb').innerHTML=te.length===0?emptyHtml('No events today.<br>Tap + to add one!'):`<div class="slbl2">Today's Events</div><div class="evlist">${te.map(e=>buildCard(e)).join('')}</div>`;
+  } else {
+    document.getElementById('tComb').style.display='none';
+    document.getElementById('tSplit').style.display='';
+    const he=te.filter(e=>e.who==='husband'||e.who==='both');
+    const we=te.filter(e=>e.who==='wife'||e.who==='both');
+    document.getElementById('tSplit').innerHTML=`<div class="split">
+      <div><div class="col-hdr"><div class="col-dot" style="background:var(--husband)"></div><div class="col-name" style="color:var(--husband)">Husband</div></div>${he.length?he.map(e=>buildMini(e)).join(''):'<div style="font-size:11px;color:var(--dim);padding:6px 0">Nothing yet</div>'}</div>
+      <div><div class="col-hdr"><div class="col-dot" style="background:var(--wife)"></div><div class="col-name" style="color:var(--wife)">Wife</div></div>${we.length?we.map(e=>buildMini(e)).join(''):'<div style="font-size:11px;color:var(--dim);padding:6px 0">Nothing yet</div>'}</div>
+    </div>`;
+  }
+}
+
+// RENDER UPCOMING
+function renderUpcoming(){
+  const cont=document.getElementById('uContent');
+  const fe=evs.filter(e=>isFut(e.date)).sort((a,b)=>(a.date+a.time).localeCompare(b.date+b.time));
+  if(!fe.length){cont.innerHTML=emptyHtml('No upcoming events.<br>Plan something fun!');return;}
+  const gr={};
+  fe.forEach(e=>{if(!gr[e.date])gr[e.date]=[];gr[e.date].push(e);});
+  let html='';
+  Object.keys(gr).sort().forEach(d=>{
+    const df=dDiff(d);
+    const badge=df===1?'<span class="up-badge">Tomorrow</span>':df<=7?`<span class="up-badge">In ${df} days</span>`:'';
+    if(uv==='c'){
+      html+=`<div class="up-day"><div class="up-hdr"><div class="up-name">${fmtD(d)}</div>${badge}</div><div class="evlist">${gr[d].map(e=>buildCard(e)).join('')}</div></div>`;
+    } else {
+      const he=gr[d].filter(e=>e.who==='husband'||e.who==='both');
+      const we=gr[d].filter(e=>e.who==='wife'||e.who==='both');
+      html+=`<div class="up-day"><div class="up-hdr"><div class="up-name">${fmtD(d)}</div>${badge}</div>
+        <div class="split">
+          <div><div class="col-hdr"><div class="col-dot" style="background:var(--husband)"></div><div class="col-name" style="color:var(--husband)">Husband</div></div>${he.length?he.map(e=>buildMini(e)).join(''):'<div style="font-size:11px;color:var(--dim)">—</div>'}</div>
+          <div><div class="col-hdr"><div class="col-dot" style="background:var(--wife)"></div><div class="col-name" style="color:var(--wife)">Wife</div></div>${we.length?we.map(e=>buildMini(e)).join(''):'<div style="font-size:11px;color:var(--dim)">—</div>'}</div>
+        </div>
+      </div>`;
+    }
+  });
+  cont.innerHTML=html;
+}
+
+// RENDER SETTINGS
+function renderSettings(){
+  document.getElementById('t30').className='tog '+(prefs.r30?'on':'');
+  document.getElementById('tAt').className='tog '+(prefs.rAt?'on':'');
+  document.getElementById('profCard').innerHTML=`
+    <div class="si-row"><span class="si-lbl">My role</span><span class="si-val" style="color:var(--${role})">${role==='husband'?'👨 Husband':'👩 Wife'}</span></div>
+    <div class="si-row"><span class="si-lbl">Pair code</span>${code?`<span class="code-copy" onclick="navigator.clipboard?.writeText('${code}').then(()=>showT('Copied!',''))">${code}</span>`:'<span class="si-val" style="color:var(--dim)">Not paired</span>'}</div>`;
+  const ls=lastSync?`Last synced ${lastSync.toLocaleTimeString([],{hour:'2-digit',minute:'2-digit'})}`:'Not yet synced';
+  document.getElementById('syncCard').innerHTML=`
+    <div class="si-row"><span class="si-lbl">Status</span><span class="si-val" style="color:${code?'var(--green)':'var(--dim)'}">${code?'Paired ✓':'Not paired'}</span></div>
+    <div class="si-row"><span class="si-lbl">${ls}</span><button onclick="doSync()" style="background:var(--s3);border:1px solid var(--border2);color:var(--muted);padding:5px 11px;border-radius:var(--rx);font-size:12px;font-weight:600;cursor:pointer">Sync Now</button></div>
+    <div class="si-row" style="display:block;padding-top:8px"><span class="si-lbl" style="font-size:11px;line-height:1.6;display:block">Share the pair code with your spouse. The app syncs automatically every 60 seconds. Both spouses can see all shared events; you can only edit your own.</span></div>`;
+  const nb=document.getElementById('notifBar');
+  if(!('Notification' in window))nb.innerHTML='';
+  else if(Notification.permission==='granted')nb.innerHTML=`<div style="background:rgba(107,232,167,.07);border:1px solid rgba(107,232,167,.2);border-radius:var(--rs);padding:9px 12px;margin-bottom:11px;font-size:13px;color:var(--green)">✓ Notifications enabled</div>`;
+  else nb.innerHTML=`<div style="background:rgba(240,120,120,.07);border:1px solid rgba(240,120,120,.2);border-radius:var(--rs);padding:9px 12px;margin-bottom:11px;font-size:13px;color:var(--red);cursor:pointer" onclick="reqNotif()">🔔 Tap to enable notifications</div>`;
+}
+function tp(k){prefs[k]=!prefs[k];sv();renderSettings();}
+
+// MODAL
+function openM(id){
+  editId=id||null;
+  const n=new Date(),ds=todayS(),ts=`${String(n.getHours()).padStart(2,'0')}:${String(n.getMinutes()).padStart(2,'0')}`;
+  if(editId){
+    const e=evs.find(x=>x.id===editId);
+    document.getElementById('et').value=e.title;
+    document.getElementById('en').value=e.note||'';
+    document.getElementById('ed').value=e.date;
+    document.getElementById('eti').value=e.time;
+    document.getElementById('ec').value=e.cat||'general';
+    document.getElementById('edu').value=e.duration||60;
+    selW=e.who||role;
+    document.getElementById('mtitle').textContent='Edit Event';
+    document.getElementById('msub').textContent='Save Changes';
+  } else {
+    document.getElementById('et').value='';
+    document.getElementById('en').value='';
+    document.getElementById('ed').value=ds;
+    document.getElementById('eti').value=ts;
+    document.getElementById('ec').value='general';
+    document.getElementById('edu').value=60;
+    selW=role||'husband';
+    document.getElementById('mtitle').textContent='Add Event';
+    document.getElementById('msub').textContent='Add to Schedule';
+  }
+  updWP();
+  document.getElementById('mbg').classList.add('open');
+  setTimeout(()=>document.getElementById('et').focus(),350);
+}
+function closeM(){document.getElementById('mbg').classList.remove('open');editId=null;}
+function bgClick(e){if(e.target===document.getElementById('mbg'))closeM();}
+function pw(w){selW=w;updWP();}
+function updWP(){document.querySelectorAll('.wp').forEach(p=>{p.className='wp';if(p.dataset.w===selW)p.classList.add('s'+selW[0]);});}
+
+function saveEv(){
+  const title=document.getElementById('et').value.trim();
+  const date=document.getElementById('ed').value;
+  const time=document.getElementById('eti').value;
+  if(!title){document.getElementById('et').focus();return;}
+  if(!date||!time)return;
+  const e={id:editId||gid(),title,note:document.getElementById('en').value.trim(),date,time,cat:document.getElementById('ec').value,duration:parseInt(document.getElementById('edu').value)||60,who:selW,owner:role,updatedAt:Date.now()};
+  if(editId){const i=evs.findIndex(x=>x.id===editId);evs[i]=e;showT('Updated',e.title);}
+  else{evs.push(e);showT('Added!',`${e.title} — ${fmtD(date)}`);}
+  sv();closeM();doSyncFull(false);
+  const at=document.querySelector('.tab.active').textContent.toLowerCase();
+  if(at.includes('today'))renderToday();
+  if(at.includes('upcoming'))renderUpcoming();
+}
+function editE(id){const e=evs.find(x=>x.id===id);if(!e||!canEdit(e)){showT('Cannot edit','You can only edit your own events.');return;}openM(id);}
+function delE(id){const e=evs.find(x=>x.id===id);if(!e||!canEdit(e)){showT('Cannot delete','You can only delete your own events.');return;}if(!confirm(`Delete "${e.title}"?`))return;evs=evs.filter(x=>x.id!==id);sv();doSyncFull(false);renderToday();renderUpcoming();}
+function clearPast(){if(!confirm('Remove past events?'))return;const t=todayS();evs=evs.filter(e=>e.date>=t);sv();doSyncFull(false);renderToday();}
+function clearAll(){if(!confirm('Delete ALL events?'))return;evs=[];sv();doSyncFull(false);renderToday();}
+function resetApp(){if(!confirm('Reset and re-pair?'))return;[RK,SYK].forEach(k=>localStorage.removeItem(k));location.reload();}
+
+// SYNC
+function setSP(st,txt){
+  const p=document.getElementById('spill'),t=document.getElementById('spillTxt');
+  if(!p)return;
+  p.className='sync-pill'+(st==='ok'?' ok':st==='go'?' go':'');
+  t.textContent=txt;
+}
+
+async function doSyncFull(announce){
+  if(!code||syncing)return;
+  syncing=true;setSP('go','Syncing…');
+  try{
+    const prompt=`You are a simple JSON data relay for a family schedule sync system.
+Pair code: "${code}"
+Sender role: "${role}"
+My current events (JSON): ${JSON.stringify(evs)}
+
+Task: Act as a key-value store. For this pair code, merge events from both spouses.
+Rules:
+1. If you've seen events from both roles for this pair code, merge them: for same id keep highest updatedAt.
+2. Return ONLY this JSON, nothing else, no markdown fences:
+{"merged":[...array of event objects...],"partnerCount":<number of partner events found>}
+3. If first time for this code, return my events as merged, partnerCount:0.`;
+
+    const r=await fetch('https://api.anthropic.com/v1/messages',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({model:'claude-sonnet-4-20250514',max_tokens:5000,system:'You are a pure JSON relay. Output only valid JSON. Never add markdown, explanations, or code fences.',messages:[{role:'user',content:prompt}]})});
+    if(!r.ok)throw new Error('HTTP '+r.status);
+    const d=await r.json();
+    const txt=(d.content||[]).filter(b=>b.type==='text').map(b=>b.text).join('').replace(/```[\w]*|```/g,'').trim();
+    const parsed=JSON.parse(txt);
+    if(parsed.merged&&Array.isArray(parsed.merged)){
+      evs=merge(evs,parsed.merged);sv();
+      lastSync=new Date();setSP('ok','Synced ✓');
+      if(announce){
+        if(parsed.partnerCount>0) showT('Synced!',`Got ${parsed.partnerCount} event(s) from your spouse ♥`);
+        else showT('Connected!','Waiting for your spouse to sync their schedule.');
+      }
+      const at=document.querySelector('.tab.active')?.textContent.toLowerCase()||'today';
+      if(at.includes('today'))renderToday();
+      if(at.includes('upcoming'))renderUpcoming();
+      if(at.includes('settings'))renderSettings();
+    }
+  }catch(err){console.warn('sync:',err);setSP('','Sync');if(announce)showT('Sync issue','Saved locally. Check connection.');}
+  syncing=false;
+}
+
+function merge(a,b){
+  const m={};
+  [...a,...b].forEach(e=>{if(!m[e.id]||e.updatedAt>m[e.id].updatedAt)m[e.id]=e;});
+  return Object.values(m);
+}
+
+function doSync(){syncing=false;doSyncFull(true);}
+
+// NOTIF
+async function reqNotif(){
+  if(!('Notification' in window))return;
+  if(Notification.permission==='default'){setTimeout(async()=>{const r=await Notification.requestPermission();if(r==='granted')showT('Notifications on','You\'ll get reminders before events.');},1500);}
+}
+function checkNotifs(){
+  if(!('Notification' in window)||Notification.permission!=='granted')return;
+  const now=new Date();
+  evs.forEach(e=>{
+    if(e.who!=='both'&&e.who!==role)return;
+    const s=new Date(e.date+'T'+e.time),ms=s-now;
+    if(prefs.r30&&ms>0&&ms<=31*60*1000&&ms>29*60*1000){const k=e.id+'_30';if(!notM[k]){notM[k]=true;sessionStorage.setItem(NK,JSON.stringify(notM));try{new Notification('⏰ In 30 minutes',{body:e.title});}catch(_){}showT('⏰ Reminder',`${e.title} starts in 30 min`);}}
+    if(prefs.rAt&&ms>=-60*1000&&ms<=60*1000){const k=e.id+'_at';if(!notM[k]){notM[k]=true;sessionStorage.setItem(NK,JSON.stringify(notM));try{new Notification('🔔 Starting now!',{body:e.title});}catch(_){}showT('🔔 Now!',`${e.title} is starting!`);}}
+  });
+}
+
+// TOAST
+function showT(title,body){
+  const w=document.getElementById('twWrap'),d=document.createElement('div');
+  d.className='toast';d.innerHTML=`<div class="toast-t">${esc(title)}</div><div class="toast-b">${esc(body)}</div>`;
+  w.appendChild(d);setTimeout(()=>d.remove(),4500);
+}
+
+// INIT
+ld();
+if(role){launchApp();if(code)setTimeout(()=>doSyncFull(false),800);}
+</script>
+</body>
+</html>
